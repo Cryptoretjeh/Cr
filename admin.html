@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Retjeh Store</title>
+<link rel="icon" href="https://raw.githubusercontent.com/Cryptoretjeh/Cr/main/logo.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root { --bg: #0a0a0a; --card: #141414; --line: #333; --ac: #00e58f; --tx: #fff; --mu: #888; --err: #ff6b6b; --gold: #ffc24a; }
+body { background: var(--bg); color: var(--tx); font-family: 'Figtree', sans-serif; padding: 20px; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; margin:0; }
+.wrap { width: 100%; max-width: 800px; margin-top: 20px; }
+.header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.header h1 { font-size: 20px; display: flex; align-items: center; gap: 10px; margin:0; }
+.header img { width: 36px; border-radius: 8px; }
+.badge { background: var(--ac); color: #000; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+.grid { display: flex; flex-direction: column; gap: 14px; }
+.order-card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.order-header { display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+.order-id { font-weight: 700; color: var(--ac); font-family: monospace; font-size: 14px; }
+.order-time { font-size: 12px; color: var(--mu); }
+.order-body { font-size: 13px; line-height: 1.6; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.order-body span { color: var(--mu); }
+.order-body b { color: #fff; }
+.order-actions { display: flex; gap: 8px; margin-top: 6px; }
+.btn { padding: 8px 14px; border-radius: 8px; border: none; font-weight: 700; cursor: pointer; font-size: 12px; transition: .2s; flex: 1; display:flex; justify-content:center; align-items:center;}
+.btn.pending { background: rgba(255, 194, 74, 0.2); color: var(--gold); border: 1px solid rgba(255, 194, 74, 0.5); }
+.btn.pending:hover { background: rgba(255, 194, 74, 0.3); }
+.btn.done { background: rgba(0, 229, 143, 0.1); color: var(--ac); border: 1px solid var(--line); cursor: default; }
+.btn.tg { background: #2aa7e6; color: #000; }
+.btn.tg:hover { background: #3cb8f5; }
+.empty { text-align: center; color: var(--mu); padding: 40px; border: 1px dashed var(--line); border-radius: 12px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="header">
+    <h1><img src="https://raw.githubusercontent.com/Cryptoretjeh/Cr/main/logo.jpg" alt="Logo"> Panel Admin</h1>
+    <div class="badge" id="count">0 Orderan</div>
+  </div>
+  
+  <div class="grid" id="orderList">
+    <div class="empty">Memuat data pesanan...</div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+import { getDatabase, ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+// KONFIGURASI FIREBASE
+const firebaseConfig = {
+  apiKey: "AIzaSyDnRx1zztQ7dGEb25pP1LfEAXz95zVhEAs",
+  authDomain: "retjeh.firebaseapp.com",
+  databaseURL: "https://retjeh-default-rtdb.asia-southeast1.firebasedatabase.app/",
+  projectId: "retjeh",
+  storageBucket: "retjeh.firebasestorage.app",
+  messagingSenderId: "821616189712",
+  appId: "1:821616189712:web:cc0d258390769808c44595",
+  measurementId: "G-TTLZGSXXH8"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// ⚠️ GANTI DENGAN TOKEN BOT BARU ANDA
+const TG = { token: 'ISI_TOKEN_BARU_ANDA_DISINI', channelId: '-1004438576894' };
+
+const $ = id => document.getElementById(id);
+const rp = n => 'Rp ' + (parseInt(n)||0).toLocaleString('id-ID');
+
+function showToast(msg, isErr){
+  alert(msg); // Menggunakan alert sederhana agar kode tidak terlalu panjang
+}
+
+async function postToTelegram(order){
+  if(!TG.token || TG.token.includes('ISI_TOKEN')){ showToast('Isi token bot dulu!', true); return; }
+  
+  const text = `<b>🎉 PESANAN SELESAI</b>\n` +
+               `🆔 ID: <code>${order.id}</code>\n` +
+               `📱 Platform: ${order.platform} - ${order.layanan}\n` +
+               `📦 Jumlah: ${order.jumlah}\n` +
+               `💰 Total: ${rp(order.total)}\n` +
+               `🔗 Link: ${order.link}\n` +
+               `👤 Pemesan: ${order.nama}`;
+
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${TG.token}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: TG.channelId, text: text, parse_mode: 'HTML' })
+    });
+    const data = await res.json();
+    if(data.ok) showToast('Berhasil terkirim ke Channel Telegram ✅');
+    else showToast('Gagal: ' + (data.description || 'Error'), true);
+  } catch (e) {
+    showToast('Gagal konek ke Telegram.', true);
+  }
+}
+
+// LISTENER DATA REAL-TIME
+const ordersRef = ref(db, 'orders');
+onValue(ordersRef, (snapshot) => {
+  const data = snapshot.val();
+  const list = $('orderList');
+  
+  if(!data) {
+    list.innerHTML = '<div class="empty">Belum ada pesanan masuk.</div>';
+    $('count').textContent = '0 Orderan';
+    return;
+  }
+
+  // Ubah object menjadi array dan urutkan dari yang terbaru
+  const arr = Object.keys(data).map(key => ({ key, ...data[key] })).sort((a,b) => new Date(b.waktu) - new Date(a.waktu));
+  
+  const pendingCount = arr.filter(x => x.status === 'pending').length;
+  $('count').textContent = `${pendingCount} Pending / ${arr.length} Total`;
+
+  list.innerHTML = arr.map(o => {
+    const isPending = o.status === 'pending';
+    const tgl = new Date(o.waktu).toLocaleString('id-ID', {day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit'});
+    
+    return `
+      <div class="order-card" style="border-left: 4px solid ${isPending ? 'var(--gold)' : 'var(--ac)'}">
+        <div class="order-header">
+          <div class="order-id">${o.id}</div>
+          <div class="order-time">${tgl}</div>
+        </div>
+        <div class="order-body">
+          <div><span>Layanan:</span> <b>${o.platform} - ${o.layanan}</b></div>
+          <div><span>Jumlah:</span> <b>${o.jumlah}</b></div>
+          <div><span>Total:</span> <b style="color:var(--ac)">${rp(o.total)}</b></div>
+          <div><span>Pemesan:</span> <b>${o.nama}</b></div>
+          <div style="grid-column:1/-1"><span>Link:</span> <a href="${o.link}" target="_blank" style="color:#2aa7e6; text-decoration:underline;">${o.link}</a></div>
+        </div>
+        <div class="order-actions">
+          ${isPending 
+            ? `<button class="btn pending" onclick="markDone('${o.key}')">⏳ Tandai Selesai</button>`
+            : `<button class="btn done" disabled>✅ Selesai</button>`
+          }
+          <button class="btn tg" onclick="sendTg('${o.key}')">✈️ Kirim Telegram</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  // Simpan data di window agar bisa diakses oleh onclick
+  window.ordersData = arr;
+});
+
+// FUNGSI GLOBAL UNTUK TOMBOL
+window.markDone = (key) => {
+  if(confirm('Tandai pesanan ini sudah selesai?')) {
+    update(ref(db, 'orders/' + key), { status: 'done' });
+  }
+};
+
+window.sendTg = (key) => {
+  const order = window.ordersData.find(o => o.key === key);
+  if(order) postToTelegram(order);
+};
+
+</script>
+</body>
+</html>
