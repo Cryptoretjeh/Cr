@@ -18,7 +18,7 @@
      ============================================================ */
   :root {
     --bg-base: #050806;
-    --bg-glass: rgba(10, 18, 14, 0.85); /* Sedikit transparan agar background terlihat */
+    --bg-glass: rgba(10, 18, 14, 0.85);
     --bg-card: rgba(16, 28, 22, 0.95);
     --border-glass: rgba(255, 255, 255, 0.08);
     --border-hover: rgba(0, 255, 163, 0.4);
@@ -66,12 +66,12 @@
   body::after {
     content: "";
     position: fixed; inset: 0; z-index: -1;
-    background-image: url('https://raw.githubusercontent.com/Cryptoretjeh/Cr/main/page-bg.jpg');
+    background-image: url('https://raw.githubusercontent.com/Cryptoretjeh/Cr/main/page-bg.jpg'); 
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    opacity: 0.5; /* Dinaikkan agar gambar lebih terlihat */
-    filter: brightness(0.8) contrast(1.1); 
+    opacity: 0.6; 
+    filter: brightness(0.9) contrast(1.1); 
     pointer-events: none;
   }
 
@@ -97,36 +97,57 @@
     position: fixed;
     height: 100vh;
     z-index: 40;
+    transition: transform 0.3s ease;
   }
+
+  /* Tombol Hide Sidebar (Desktop) */
+  .hide-sidebar-btn {
+    position: absolute;
+    right: -15px;
+    top: 20px;
+    width: 30px; height: 30px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-glass);
+    border-radius: 50%;
+    color: #fff;
+    display: grid; place-items: center;
+    cursor: pointer;
+    z-index: 50;
+  }
+  .hide-sidebar-btn:hover { background: var(--accent); color: #000; }
 
   .brand {
     padding: 20px 12px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* Ubah ke row agar tombol bahasa & minimize sejajar */
     align-items: center;
-    text-align: center;
+    justify-content: space-between;
+    text-align: left;
     border-bottom: 1px solid var(--border-glass);
     background: rgba(0,0,0,0.3);
+    gap: 10px;
   }
   
+  /* FOTO PROFIL KEMBALI KE LOGO.JPG */
   .profile-pic {
-    width: 65px;
-    height: 65px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     border: 2px solid var(--accent);
     padding: 2px;
-    margin-bottom: 10px;
     box-shadow: 0 0 15px var(--accent-glow);
     object-fit: cover;
     background: #000;
+    flex-shrink: 0;
   }
   
   .brand-text {
     font-family: var(--display);
     font-weight: 700;
-    font-size: 15px;
+    font-size: 14px;
     color: var(--text-main);
     line-height: 1.2;
+    flex: 1;
   }
   
   .brand-text small {
@@ -136,7 +157,40 @@
     color: var(--accent);
     font-weight: 800;
     margin-top: 2px;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
+  }
+
+  .header-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-end;
+  }
+
+  /* Tombol Bahasa */
+  .lang-switch {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid var(--border-glass);
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .lang-switch:hover { background: var(--accent); color: #000; }
+
+  /* Tombol Minimize Menu (Mobile) */
+  .minimize-btn {
+    display: none; /* Hanya muncul di mobile */
+    background: rgba(255,255,255,0.1);
+    border: 1px solid var(--border-glass);
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    cursor: pointer;
   }
 
   .sidebar-menu {
@@ -146,6 +200,7 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
   }
   .sidebar-menu::-webkit-scrollbar { width: 3px; }
   .sidebar-menu::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
@@ -239,7 +294,12 @@
     max-width: 1300px;
     position: relative;
     z-index: 1;
+    transition: margin-left 0.3s ease;
   }
+
+  /* Class ketika sidebar disembunyikan */
+  body.sidebar-hidden .sidebar { transform: translateX(-100%); }
+  body.sidebar-hidden .main-content { margin-left: 0; }
 
   /* ============================================================
      BANNER
@@ -262,10 +322,10 @@
   .banner::before {
     content: "";
     position: absolute; inset: 0;
-    background-image: url('https://raw.githubusercontent.com/Cryptoretjeh/Cr/main/header-bg.jpg');
+    background-image: url('https://raw.githubusercontent.com/Cryptoretjeh/Cr/main/header-bg.jpg'); 
     background-size: cover;
     background-position: center;
-    opacity: 0.8;
+    opacity: 0.9;
     z-index: 0;
   }
   
@@ -492,34 +552,32 @@
      RESPONSIVE (MOBILE)
      ============================================================ */
   @media (max-width: 900px) {
-    .main-content { padding: 16px; margin-left: 0; }
+    .main-content { padding: 16px; margin-left: 0 !important; }
     .banner { padding: 20px; min-height: 200px; }
     .banner h1 { font-size: 26px; }
+    .hide-sidebar-btn { display: none; } /* Sembunyikan tombol hide di mobile */
   }
 
   @media (max-width: 768px) {
     .app-container { flex-direction: column; }
     
-    /* AREA MENU MOBILE DENGAN BACKGROUND GAMBAR */
     .sidebar { 
       width: 100%; 
       height: auto; 
       position: sticky; 
       top: 0;
       border-right: none; 
-      
-      /* Efek Kaca + Gambar Background */
-      background-color: rgba(5, 8, 6, 0.85); /* Warna dasar gelap transparan */
+      background-color: rgba(5, 8, 6, 0.85); 
       background-image: url('https://raw.githubusercontent.com/Cryptoretjeh/Cr/main/page-bg.jpg');
       background-size: cover;
       background-position: center;
-      background-blend-mode: overlay; /* Menyatukan gambar dengan warna gelap */
+      background-blend-mode: overlay; 
       backdrop-filter: blur(15px);
       -webkit-backdrop-filter: blur(15px);
-      
       z-index: 100;
       box-shadow: 0 4px 20px rgba(0,0,0,0.8); 
       border-bottom: 1px solid var(--border-glass);
+      transform: none !important; /* Batalkan hide sidebar desktop */
     }
     
     .brand { 
@@ -528,18 +586,30 @@
       text-align: left; 
       gap: 12px; 
       border-bottom: 1px solid rgba(255,255,255,0.05);
-      background: transparent; /* Biarkan background sidebar yang mengatur */
+      background: transparent;
     }
-    .profile-pic { width: 45px; height: 45px; margin-bottom: 0; border-width: 2px; }
+    .profile-pic { width: 45px; height: 45px; border-width: 2px; }
     .brand-text { font-size: 14px; }
     
-    /* MENU MOBILE: 4 KOLOM */
+    .header-actions { flex-direction: row; align-items: center; }
+    .minimize-btn { display: block; } /* Munculkan tombol minimize di mobile */
+
+    /* Class untuk menyembunyikan menu di mobile */
+    .sidebar-menu.collapsed {
+      max-height: 0;
+      opacity: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      overflow: hidden;
+      border: none;
+    }
+
     .sidebar-menu { 
       display: grid; 
       grid-template-columns: repeat(4, 1fr); 
       padding: 8px 12px; 
       gap: 6px; 
-      max-height: 180px; 
+      max-height: 250px; /* Cukup untuk 3 baris */
       background: transparent;
     }
     .menu-label { display: none; }
@@ -551,7 +621,7 @@
       text-align: center; 
       gap: 4px; 
       border: 1px solid var(--border-glass); 
-      background: rgba(0,0,0,0.5); /* Kotak menu tetap gelap agar teks tajam */
+      background: rgba(0,0,0,0.5); 
       border-radius: 6px;
     }
     .icon-wrap { width: 22px; height: 22px; font-size: 11px; margin-bottom: 0;}
@@ -579,18 +649,29 @@
 
 <div class="app-container">
 
-  <!-- SIDEBAR / HEADER MOBILE -->
-  <aside class="sidebar">
+  <aside class="sidebar" id="sidebar">
+    <!-- Tombol Hide Sidebar (Desktop) -->
+    <button class="hide-sidebar-btn" onclick="document.body.classList.toggle('sidebar-hidden')">◀</button>
+
     <div class="brand">
+      <!-- FOTO PROFIL KEMBALI KE LOGO.JPG -->
       <img src="https://raw.githubusercontent.com/Cryptoretjeh/Cr/main/logo.jpg" alt="Logo Retjeh" class="profile-pic">
+      
       <div class="brand-text">
         Retjeh Store
         <small>Digital Services</small>
       </div>
+
+      <div class="header-actions">
+        <!-- TOMBOL BAHASA -->
+        <button class="lang-switch" onclick="toggleLang()" id="langBtn">EN</button>
+        <!-- TOMBOL MINIMIZE (Hanya Muncul di Mobile) -->
+        <button class="minimize-btn" onclick="toggleMenuMobile()" id="minimizeBtn">▼</button>
+      </div>
     </div>
 
-    <nav class="sidebar-menu">
-      <div class="menu-label">Sosmed</div>
+    <nav class="sidebar-menu" id="sidebarMenu">
+      <div class="menu-label" data-id="Sosmed" data-en="Social">Sosmed</div>
       <button class="menu-item active" onclick="openTab('telegram', this)">
         <span class="icon-wrap">✈️</span> Telegram
       </button>
@@ -610,21 +691,21 @@
         <span class="icon-wrap">▶️</span> YouTube
       </button>
 
-      <div class="menu-label" style="margin-top: 8px;">Lainnya</div>
+      <div class="menu-label" style="margin-top: 8px;" data-id="Lainnya" data-en="Others">Lainnya</div>
       <button class="menu-item" onclick="openTab('pkt-subs', this)">
-        <span class="icon-wrap">👤</span> Paket Subs
+        <span class="icon-wrap">👤</span> <span data-id="Paket Subs" data-en="Subs Package">Paket Subs</span>
       </button>
       <button class="menu-item" onclick="openTab('pkt-like', this)">
-        <span class="icon-wrap">👍</span> Paket Like
+        <span class="icon-wrap">👍</span> <span data-id="Paket Like" data-en="Like Package">Paket Like</span>
       </button>
       <button class="menu-item" onclick="openTab('form-order', this)">
-        <span class="icon-wrap">📝</span> Form Order
+        <span class="icon-wrap">📝</span> <span data-id="Form Order" data-en="Order Form">Form Order</span>
       </button>
       <button class="menu-item" onclick="openTab('pembayaran', this)">
-        <span class="icon-wrap">💳</span> Pembayaran
+        <span class="icon-wrap">💳</span> <span data-id="Pembayaran" data-en="Payment">Pembayaran</span>
       </button>
       <button class="menu-item" onclick="openTab('testimoni', this)">
-        <span class="icon-wrap">⭐</span> Testimoni
+        <span class="icon-wrap">⭐</span> <span data-id="Testimoni" data-en="Reviews">Testimoni</span>
       </button>
       <button class="menu-item" onclick="openTab('faq', this)">
         <span class="icon-wrap">❓</span> FAQ
@@ -632,39 +713,36 @@
     </nav>
 
     <div class="sidebar-footer">
-      <a href="https://t.me/CryptoRetjeh_IND" target="_blank" class="contact-btn btn-tg">✈️ Admin Tele</a>
+      <a href="https://t.me/CryptoRetjeh_IND" target="_blank" class="contact-btn btn-tg"><span data-id="✈️ Admin Tele" data-en="✈️ Admin Tele">✈️ Admin Tele</span></a>
       <a href="https://wa.me/6281279499478" target="_blank" class="contact-btn btn-wa">💬 WhatsApp</a>
     </div>
   </aside>
 
   <a href="https://wa.me/6281279499478" target="_blank" class="float-wa">💬</a>
 
-  <!-- MAIN CONTENT -->
   <main class="main-content">
 
-    <!-- BANNER -->
     <div class="banner">
       <div class="banner-content">
-        <span class="banner-tag">LAYANAN 100% MANUAL</span>
-        <h1>Tingkatkan Engagement Sosmed</h1>
-        <p>Dikerjakan manual oleh real human, bukan bot. Proses bertahap dan aman.</p>
+        <span class="banner-tag" data-id="LAYANAN 100% MANUAL" data-en="100% MANUAL SERVICE">LAYANAN 100% MANUAL</span>
+        <h1 data-id="Tingkatkan Engagement Sosmed" data-en="Boost Your Social Media Engagement">Tingkatkan Engagement Sosmed</h1>
+        <p data-id="Dikerjakan manual oleh real human, bukan bot. Proses bertahap dan aman." data-en="Done manually by real humans, not bots. Gradual and safe process.">Dikerjakan manual oleh real human, bukan bot. Proses bertahap dan aman.</p>
         
         <div class="banner-actions">
-          <button class="btn-quick primary" onclick="openTab('form-order', document.querySelector('.menu-item:nth-child(9)'))">🛒 Order</button>
-          <button class="btn-quick secondary" onclick="openTab('telegram', document.querySelector('.menu-item:nth-child(1)'))">📋 Harga</button>
+          <button class="btn-quick primary" onclick="openTab('form-order', document.querySelectorAll('.menu-item')[8])"><span data-id="🛒 Order" data-en="🛒 Order">🛒 Order</span></button>
+          <button class="btn-quick secondary" onclick="openTab('telegram', document.querySelectorAll('.menu-item')[0])"><span data-id="📋 Harga" data-en="📋 Price">📋 Harga</span></button>
         </div>
 
         <div class="banner-features">
-          <span>👨‍💻 Real Human</span>
-          <span>🔒 Tanpa Password</span>
+          <span data-id="👨‍💻 Real Human" data-en="👨‍💻 Real Human">👨‍💻 Real Human</span>
+          <span data-id="🔒 Tanpa Password" data-en="🔒 No Password">🔒 Tanpa Password</span>
         </div>
       </div>
     </div>
 
-    <!-- STATUS BAR -->
     <div class="status-bar">
       <div class="status-dot"></div>
-      Sistem Aktif — Min. Order Rp 5.000
+      <span data-id="Sistem Aktif — Min. Order Rp 5.000" data-en="System Active — Min. Order Rp 5.000">Sistem Aktif — Min. Order Rp 5.000</span>
       <span class="id-lead">ID: <b>#RS-<span id="orderIdDisplay">...</span></b></span>
     </div>
 
@@ -676,12 +754,26 @@
           <span class="badge">READY</span>
         </div>
         <table>
-          <thead><tr><th>Layanan</th><th>Harga</th><th>Satuan</th></tr></thead>
+          <thead>
+            <tr>
+              <th data-id="Layanan" data-en="Service">Layanan</th>
+              <th data-id="Harga" data-en="Price">Harga</th>
+              <th data-id="Satuan" data-en="Unit">Satuan</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td>Member / Join</td><td class="price-col">Rp 500</td><td>per member</td></tr>
-            <tr><td>Reaction</td><td class="price-col">Rp 250</td><td>per reaction</td></tr>
-            <tr><td>View Post</td><td class="price-col">Rp 1.500</td><td>per 5 view</td></tr>
-            <tr><td>Share / Forward</td><td class="price-col">Rp 5.000</td><td>per 10 share</td></tr>
+            <tr><td data-id="Member / Join" data-en="Member / Join">Member / Join</td><td class="price-col">Rp 500</td><td data-id="per member" data-en="per member">per member</td></tr>
+            <tr><td data-id="Reaction" data-en="Reaction">Reaction</td><td class="price-col">Rp 250</td><td data-id="per reaction" data-en="per reaction">per reaction</td></tr>
+            <tr><td data-id="View Post" data-en="View Post">View Post</td><td class="price-col">Rp 1.500</td><td data-id="per 5 view" data-en="per 5 view">per 5 view</td></tr>
+            <tr><td data-id="Share / Forward" data-en="Share / Forward">Share / Forward</td><td class="price-col">Rp 5.000</td><td data-id="per 10 share" data-en="per 10 share">per 10 share</td></tr>
+            <tr>
+              <td>
+                <span data-id="Refferal" data-en="Referral">Refferal</span><br>
+                <span style="font-size:10px; color:var(--text-muted);" data-id="(hanya reff tidak ngerjain task)" data-en="(referral only, no task required)">(hanya reff tidak ngerjain task)</span>
+              </td>
+              <td class="price-col">Rp 1.500</td>
+              <td data-id="per refferal" data-en="per referral">per refferal</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -694,13 +786,19 @@
           <span class="badge">READY</span>
         </div>
         <table>
-          <thead><tr><th>Layanan</th><th>Harga</th><th>Satuan</th></tr></thead>
+          <thead>
+            <tr>
+              <th data-id="Layanan" data-en="Service">Layanan</th>
+              <th data-id="Harga" data-en="Price">Harga</th>
+              <th data-id="Satuan" data-en="Unit">Satuan</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td>Follower</td><td class="price-col">Rp 500</td><td>per follower</td></tr>
-            <tr><td>Like</td><td class="price-col">Rp 250</td><td>per like</td></tr>
-            <tr><td>Komen</td><td class="price-col">Rp 1.500</td><td>per 5 komen</td></tr>
-            <tr><td>Share</td><td class="price-col">Rp 5.000</td><td>per 10 share</td></tr>
-            <tr><td>View Video</td><td class="price-col">Rp 1.500</td><td>per 1.000 view</td></tr>
+            <tr><td data-id="Follower" data-en="Follower">Follower</td><td class="price-col">Rp 500</td><td data-id="per follower" data-en="per follower">per follower</td></tr>
+            <tr><td data-id="Like" data-en="Like">Like</td><td class="price-col">Rp 250</td><td data-id="per like" data-en="per like">per like</td></tr>
+            <tr><td data-id="Komen" data-en="Comment">Komen</td><td class="price-col">Rp 1.500</td><td data-id="per 5 komen" data-en="per 5 comments">per 5 komen</td></tr>
+            <tr><td data-id="Share" data-en="Share">Share</td><td class="price-col">Rp 5.000</td><td data-id="per 10 share" data-en="per 10 shares">per 10 share</td></tr>
+            <tr><td data-id="View Video" data-en="Video View">View Video</td><td class="price-col">Rp 1.500</td><td data-id="per 1.000 view" data-en="per 1,000 views">per 1.000 view</td></tr>
           </tbody>
         </table>
       </div>
@@ -713,12 +811,18 @@
           <span class="badge">READY</span>
         </div>
         <table>
-          <thead><tr><th>Layanan</th><th>Harga</th><th>Satuan</th></tr></thead>
+          <thead>
+            <tr>
+              <th data-id="Layanan" data-en="Service">Layanan</th>
+              <th data-id="Harga" data-en="Price">Harga</th>
+              <th data-id="Satuan" data-en="Unit">Satuan</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td>Follower</td><td class="price-col">Rp 500</td><td>per follower</td></tr>
-            <tr><td>Like</td><td class="price-col">Rp 250</td><td>per like</td></tr>
-            <tr><td>Reply / Komen</td><td class="price-col">Rp 1.500</td><td>per 5 reply</td></tr>
-            <tr><td>Retweet / Share</td><td class="price-col">Rp 5.000</td><td>per 10 retweet</td></tr>
+            <tr><td data-id="Follower" data-en="Follower">Follower</td><td class="price-col">Rp 500</td><td data-id="per follower" data-en="per follower">per follower</td></tr>
+            <tr><td data-id="Like" data-en="Like">Like</td><td class="price-col">Rp 250</td><td data-id="per like" data-en="per like">per like</td></tr>
+            <tr><td data-id="Reply / Komen" data-en="Reply / Comment">Reply / Komen</td><td class="price-col">Rp 1.500</td><td data-id="per 5 reply" data-en="per 5 replies">per 5 reply</td></tr>
+            <tr><td data-id="Retweet / Share" data-en="Retweet / Share">Retweet / Share</td><td class="price-col">Rp 5.000</td><td data-id="per 10 retweet" data-en="per 10 retweets">per 10 retweet</td></tr>
           </tbody>
         </table>
       </div>
@@ -731,12 +835,18 @@
           <span class="badge">READY</span>
         </div>
         <table>
-          <thead><tr><th>Layanan</th><th>Harga</th><th>Satuan</th></tr></thead>
+          <thead>
+            <tr>
+              <th data-id="Layanan" data-en="Service">Layanan</th>
+              <th data-id="Harga" data-en="Price">Harga</th>
+              <th data-id="Satuan" data-en="Unit">Satuan</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td>Follower / Page Like</td><td class="price-col">Rp 500</td><td>per follower</td></tr>
-            <tr><td>Like Post</td><td class="price-col">Rp 250</td><td>per like</td></tr>
-            <tr><td>Komen</td><td class="price-col">Rp 1.500</td><td>per 5 komen</td></tr>
-            <tr><td>Share</td><td class="price-col">Rp 5.000</td><td>per 10 share</td></tr>
+            <tr><td data-id="Follower / Page Like" data-en="Follower / Page Like">Follower / Page Like</td><td class="price-col">Rp 500</td><td data-id="per follower" data-en="per follower">per follower</td></tr>
+            <tr><td data-id="Like Post" data-en="Like Post">Like Post</td><td class="price-col">Rp 250</td><td data-id="per like" data-en="per like">per like</td></tr>
+            <tr><td data-id="Komen" data-en="Comment">Komen</td><td class="price-col">Rp 1.500</td><td data-id="per 5 komen" data-en="per 5 comments">per 5 komen</td></tr>
+            <tr><td data-id="Share" data-en="Share">Share</td><td class="price-col">Rp 5.000</td><td data-id="per 10 share" data-en="per 10 shares">per 10 share</td></tr>
           </tbody>
         </table>
       </div>
@@ -749,12 +859,18 @@
           <span class="badge">READY</span>
         </div>
         <table>
-          <thead><tr><th>Layanan</th><th>Harga</th><th>Satuan</th></tr></thead>
+          <thead>
+            <tr>
+              <th data-id="Layanan" data-en="Service">Layanan</th>
+              <th data-id="Harga" data-en="Price">Harga</th>
+              <th data-id="Satuan" data-en="Unit">Satuan</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td>Follower</td><td class="price-col">Rp 500</td><td>per follower</td></tr>
-            <tr><td>Like</td><td class="price-col">Rp 250</td><td>per like</td></tr>
-            <tr><td>Komen</td><td class="price-col">Rp 1.500</td><td>per 5 komen</td></tr>
-            <tr><td>Share</td><td class="price-col">Rp 5.000</td><td>per 10 share</td></tr>
+            <tr><td data-id="Follower" data-en="Follower">Follower</td><td class="price-col">Rp 500</td><td data-id="per follower" data-en="per follower">per follower</td></tr>
+            <tr><td data-id="Like" data-en="Like">Like</td><td class="price-col">Rp 250</td><td data-id="per like" data-en="per like">per like</td></tr>
+            <tr><td data-id="Komen" data-en="Comment">Komen</td><td class="price-col">Rp 1.500</td><td data-id="per 5 komen" data-en="per 5 comments">per 5 komen</td></tr>
+            <tr><td data-id="Share" data-en="Share">Share</td><td class="price-col">Rp 5.000</td><td data-id="per 10 share" data-en="per 10 shares">per 10 share</td></tr>
           </tbody>
         </table>
       </div>
@@ -767,12 +883,18 @@
           <span class="badge">READY</span>
         </div>
         <table>
-          <thead><tr><th>Layanan</th><th>Harga</th><th>Satuan</th></tr></thead>
+          <thead>
+            <tr>
+              <th data-id="Layanan" data-en="Service">Layanan</th>
+              <th data-id="Harga" data-en="Price">Harga</th>
+              <th data-id="Satuan" data-en="Unit">Satuan</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td>Subscriber</td><td class="price-col">Rp 500</td><td>per subs</td></tr>
-            <tr><td>Like</td><td class="price-col">Rp 250</td><td>per like</td></tr>
-            <tr><td>Komen</td><td class="price-col">Rp 1.500</td><td>per 5 komen</td></tr>
-            <tr><td>Share</td><td class="price-col">Rp 5.000</td><td>per 10 share</td></tr>
+            <tr><td data-id="Subscriber" data-en="Subscriber">Subscriber</td><td class="price-col">Rp 500</td><td data-id="per subs" data-en="per subs">per subs</td></tr>
+            <tr><td data-id="Like" data-en="Like">Like</td><td class="price-col">Rp 250</td><td data-id="per like" data-en="per like">per like</td></tr>
+            <tr><td data-id="Komen" data-en="Comment">Komen</td><td class="price-col">Rp 1.500</td><td data-id="per 5 komen" data-en="per 5 comments">per 5 komen</td></tr>
+            <tr><td data-id="Share" data-en="Share">Share</td><td class="price-col">Rp 5.000</td><td data-id="per 10 share" data-en="per 10 shares">per 10 share</td></tr>
           </tbody>
         </table>
       </div>
@@ -780,70 +902,70 @@
 
     <!-- PAKET SUBS -->
     <div id="pkt-subs" class="tab-content">
-      <h2 class="section-title">Paket Subs</h2>
-      <p class="section-sub">Pilihan paket hemat menambah pengikut.</p>
+      <h2 class="section-title" data-id="Paket Subs" data-en="Subs Package">Paket Subs</h2>
+      <p class="section-sub" data-id="Pilihan paket hemat menambah pengikut." data-en="Affordable packages to increase followers.">Pilihan paket hemat menambah pengikut.</p>
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
         <div class="pay-card" style="padding: 20px;">
           <div style="font-size: 11px; color: var(--text-muted); font-weight: 800; margin-bottom: 8px;">BRONZE</div>
           <div style="font-size: 24px; font-weight: 800; margin-bottom: 12px;">Rp 5.000</div>
           <ul style="list-style: none; font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.8;">
-            <li>✓ 10 Subscribe / Follow</li>
-            <li>✓ Proses Manual Admin</li>
+            <li>✓ <span data-id="10 Subscribe / Follow" data-en="10 Subscribe / Follow">10 Subscribe / Follow</span></li>
+            <li>✓ <span data-id="Proses Manual Admin" data-en="Manual Process by Admin">Proses Manual Admin</span></li>
           </ul>
-          <a href="https://wa.me/6281279499478" class="btn-copy" style="text-decoration:none;">Pilih Paket</a>
+          <a href="https://wa.me/6281279499478" class="btn-copy" style="text-decoration:none;" data-id="Pilih Paket" data-en="Choose Package">Pilih Paket</a>
         </div>
         <div class="pay-card" style="padding: 20px; border-color: rgba(0,255,163,0.5);">
           <div style="font-size: 11px; color: var(--accent); font-weight: 800; margin-bottom: 8px;">SILVER</div>
           <div style="font-size: 24px; font-weight: 800; color: var(--accent); margin-bottom: 12px;">Rp 12.500</div>
           <ul style="list-style: none; font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.8;">
-            <li>✓ 25 Subscribe / Follow</li>
-            <li>✓ Proses Manual Admin</li>
+            <li>✓ <span data-id="25 Subscribe / Follow" data-en="25 Subscribe / Follow">25 Subscribe / Follow</span></li>
+            <li>✓ <span data-id="Proses Manual Admin" data-en="Manual Process by Admin">Proses Manual Admin</span></li>
           </ul>
-          <a href="https://wa.me/6281279499478" class="btn-submit" style="text-decoration:none; padding:10px;">Pilih Paket</a>
+          <a href="https://wa.me/6281279499478" class="btn-submit" style="text-decoration:none; padding:10px;" data-id="Pilih Paket" data-en="Choose Package">Pilih Paket</a>
         </div>
         <div class="pay-card" style="padding: 20px;">
           <div style="font-size: 11px; color: var(--text-muted); font-weight: 800; margin-bottom: 8px;">GOLD</div>
           <div style="font-size: 24px; font-weight: 800; margin-bottom: 12px;">Rp 25.000</div>
           <ul style="list-style: none; font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.8;">
-            <li>✓ 50 Subscribe / Follow</li>
-            <li>✓ Proses Manual Admin</li>
+            <li>✓ <span data-id="50 Subscribe / Follow" data-en="50 Subscribe / Follow">50 Subscribe / Follow</span></li>
+            <li>✓ <span data-id="Proses Manual Admin" data-en="Manual Process by Admin">Proses Manual Admin</span></li>
           </ul>
-          <a href="https://wa.me/6281279499478" class="btn-copy" style="text-decoration:none;">Pilih Paket</a>
+          <a href="https://wa.me/6281279499478" class="btn-copy" style="text-decoration:none;" data-id="Pilih Paket" data-en="Choose Package">Pilih Paket</a>
         </div>
       </div>
     </div>
 
     <!-- PAKET LIKE -->
     <div id="pkt-like" class="tab-content">
-      <h2 class="section-title">Paket Like</h2>
-      <p class="section-sub">Pilihan paket hemat menambah like.</p>
+      <h2 class="section-title" data-id="Paket Like" data-en="Like Package">Paket Like</h2>
+      <p class="section-sub" data-id="Pilihan paket hemat menambah like." data-en="Affordable packages to increase likes.">Pilihan paket hemat menambah like.</p>
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
         <div class="pay-card" style="padding: 20px;">
           <div style="font-size: 11px; color: var(--text-muted); font-weight: 800; margin-bottom: 8px;">BRONZE</div>
           <div style="font-size: 24px; font-weight: 800; margin-bottom: 12px;">Rp 2.500</div>
           <ul style="list-style: none; font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.8;">
-            <li>✓ 10 Like / Reaction</li>
-            <li>✓ Proses Manual Admin</li>
+            <li>✓ <span data-id="10 Like / Reaction" data-en="10 Like / Reaction">10 Like / Reaction</span></li>
+            <li>✓ <span data-id="Proses Manual Admin" data-en="Manual Process by Admin">Proses Manual Admin</span></li>
           </ul>
-          <a href="https://wa.me/6281279499478" class="btn-copy" style="text-decoration:none;">Pilih Paket</a>
+          <a href="https://wa.me/6281279499478" class="btn-copy" style="text-decoration:none;" data-id="Pilih Paket" data-en="Choose Package">Pilih Paket</a>
         </div>
         <div class="pay-card" style="padding: 20px; border-color: rgba(0,255,163,0.5);">
           <div style="font-size: 11px; color: var(--accent); font-weight: 800; margin-bottom: 8px;">SILVER</div>
           <div style="font-size: 24px; font-weight: 800; color: var(--accent); margin-bottom: 12px;">Rp 6.000</div>
           <ul style="list-style: none; font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.8;">
-            <li>✓ 25 Like / Reaction</li>
-            <li>✓ Proses Manual Admin</li>
+            <li>✓ <span data-id="25 Like / Reaction" data-en="25 Like / Reaction">25 Like / Reaction</span></li>
+            <li>✓ <span data-id="Proses Manual Admin" data-en="Manual Process by Admin">Proses Manual Admin</span></li>
           </ul>
-          <a href="https://wa.me/6281279499478" class="btn-submit" style="text-decoration:none; padding:10px;">Pilih Paket</a>
+          <a href="https://wa.me/6281279499478" class="btn-submit" style="text-decoration:none; padding:10px;" data-id="Pilih Paket" data-en="Choose Package">Pilih Paket</a>
         </div>
         <div class="pay-card" style="padding: 20px;">
           <div style="font-size: 11px; color: var(--text-muted); font-weight: 800; margin-bottom: 8px;">GOLD</div>
           <div style="font-size: 24px; font-weight: 800; margin-bottom: 12px;">Rp 12.000</div>
           <ul style="list-style: none; font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.8;">
-            <li>✓ 50 Like / Reaction</li>
-            <li>✓ Proses Manual Admin</li>
+            <li>✓ <span data-id="50 Like / Reaction" data-en="50 Like / Reaction">50 Like / Reaction</span></li>
+            <li>✓ <span data-id="Proses Manual Admin" data-en="Manual Process by Admin">Proses Manual Admin</span></li>
           </ul>
-          <a href="https://wa.me/6281279499478" class="btn-copy" style="text-decoration:none;">Pilih Paket</a>
+          <a href="https://wa.me/6281279499478" class="btn-copy" style="text-decoration:none;" data-id="Pilih Paket" data-en="Choose Package">Pilih Paket</a>
         </div>
       </div>
     </div>
@@ -851,27 +973,27 @@
     <!-- FORM ORDER -->
     <div id="form-order" class="tab-content">
       <div class="panel" style="padding: 24px;">
-        <h2 class="section-title">Form Order</h2>
-        <p class="section-sub">Isi data dengan benar untuk diproses admin.</p>
+        <h2 class="section-title" data-id="Form Order" data-en="Order Form">Form Order</h2>
+        <p class="section-sub" data-id="Isi data dengan benar untuk diproses admin." data-en="Fill in the data correctly to be processed by admin.">Isi data dengan benar untuk diproses admin.</p>
 
         <div class="order-steps">
           <div class="step-item">
             <div class="step-num">1</div>
-            <div class="step-text">Isi Form</div>
+            <div class="step-text" data-id="Isi Form" data-en="Fill Form">Isi Form</div>
           </div>
           <div class="step-item">
             <div class="step-num">2</div>
-            <div class="step-text">Transfer</div>
+            <div class="step-text" data-id="Transfer" data-en="Transfer">Transfer</div>
           </div>
           <div class="step-item">
             <div class="step-num">3</div>
-            <div class="step-text">Proses</div>
+            <div class="step-text" data-id="Proses" data-en="Process">Proses</div>
           </div>
         </div>
 
         <form id="orderForm" onsubmit="kirimOrder(event)">
           <div class="form-group">
-            <label class="form-label">Platform</label>
+            <label class="form-label" data-id="Platform" data-en="Platform">Platform</label>
             <select class="form-control" id="platform" required onchange="hitungTotal()">
               <option value="Telegram">Telegram</option>
               <option value="TikTok">TikTok</option>
@@ -883,45 +1005,46 @@
           </div>
 
           <div class="form-group">
-            <label class="form-label">Layanan</label>
+            <label class="form-label" data-id="Layanan" data-en="Service">Layanan</label>
             <select class="form-control" id="layanan" required onchange="hitungTotal()">
-              <option value="Subscriber / Follower" data-harga="500">Subscriber / Follower — Rp 500</option>
-              <option value="Like / Reaction" data-harga="250">Like / Reaction — Rp 250</option>
-              <option value="Komen" data-harga="1500">Komen — Rp 1.500 (per 5)</option>
-              <option value="Share / Bagikan" data-harga="5000">Share — Rp 5.000 (per 10)</option>
-              <option value="View / Tonton" data-harga="1500">View — Rp 1.500</option>
+              <option value="Subscriber / Follower" data-harga="500" data-id="Subscriber / Follower — Rp 500" data-en="Subscriber / Follower — Rp 500">Subscriber / Follower — Rp 500</option>
+              <option value="Like / Reaction" data-harga="250" data-id="Like / Reaction — Rp 250" data-en="Like / Reaction — Rp 250">Like / Reaction — Rp 250</option>
+              <option value="Komen" data-harga="1500" data-id="Komen — Rp 1.500 (per 5)" data-en="Comment — Rp 1,500 (per 5)">Komen — Rp 1.500 (per 5)</option>
+              <option value="Share / Bagikan" data-harga="5000" data-id="Share — Rp 5.000 (per 10)" data-en="Share — Rp 5,000 (per 10)">Share — Rp 5.000 (per 10)</option>
+              <option value="View / Tonton" data-harga="1500" data-id="View — Rp 1.500" data-en="View — Rp 1,500">View — Rp 1.500</option>
+              <option value="Refferal" data-harga="1500" data-id="Refferal — Rp 1.500" data-en="Referral — Rp 1,500">Refferal — Rp 1.500</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label class="form-label">Jumlah</label>
-            <input type="number" class="form-control" id="jumlah" placeholder="Contoh: 1000" required min="1" oninput="hitungTotal()">
+            <label class="form-label" data-id="Jumlah" data-en="Quantity">Jumlah</label>
+            <input type="number" class="form-control" id="jumlah" placeholder="Contoh: 1000 / Ex: 1000" required min="1" oninput="hitungTotal()">
           </div>
 
           <div class="price-total-box">
-            <span class="label">Total</span>
+            <span class="label" data-id="Total" data-en="Total">Total</span>
             <span class="value" id="totalHarga">Rp 0</span>
           </div>
 
           <div class="form-group" style="margin-top: 16px;">
-            <label class="form-label">Link Target</label>
+            <label class="form-label" data-id="Link Target" data-en="Target Link">Link Target</label>
             <input type="url" class="form-control" id="link" placeholder="https://..." required>
           </div>
 
           <div class="form-group">
-            <label class="form-label">Nama / Username</label>
-            <input type="text" class="form-control" id="nama" placeholder="Nama Anda" required>
+            <label class="form-label" data-id="Nama / Username" data-en="Name / Username">Nama / Username</label>
+            <input type="text" class="form-control" id="nama" placeholder="Nama Anda / Your Name" required>
           </div>
 
-          <button type="submit" class="btn-submit" id="btnSubmit">SEND ORDER</button>
+          <button type="submit" class="btn-submit" id="btnSubmit" data-id="KIRIM ORDER" data-en="SEND ORDER">KIRIM ORDER</button>
         </form>
       </div>
     </div>
 
     <!-- PEMBAYARAN -->
     <div id="pembayaran" class="tab-content">
-      <h2 class="section-title">Pembayaran</h2>
-      <p class="section-sub">Transfer ke rekening di bawah, lalu kirim bukti.</p>
+      <h2 class="section-title" data-id="Pembayaran" data-en="Payment">Pembayaran</h2>
+      <p class="section-sub" data-id="Transfer ke rekening di bawah, lalu kirim bukti." data-en="Transfer to the account below, then send the receipt.">Transfer ke rekening di bawah, lalu kirim bukti.</p>
 
       <div class="pay-grid">
         <div class="pay-card">
@@ -930,10 +1053,10 @@
             <span class="badge">✓</span>
           </div>
           <div class="pay-card-body">
-            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase;">Nomor Rekening</div>
+            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase;" data-id="Nomor Rekening" data-en="Account Number">Nomor Rekening</div>
             <div class="pay-number" id="bca-num">85-3533-9593</div>
             <div style="font-size:12px; color:var(--text-muted); margin-bottom:16px;">A/n <b>Agustian Pratama</b></div>
-            <button class="btn-copy" onclick="copyText('bca-num', '[OK] Nomor BCA disalin!')">Copy Number</button>
+            <button class="btn-copy" onclick="copyText('bca-num', '[OK] Nomor BCA disalin!')" data-id="Salin Nomor" data-en="Copy Number">Salin Nomor</button>
           </div>
         </div>
 
@@ -943,17 +1066,17 @@
             <span class="badge">✓</span>
           </div>
           <div class="pay-card-body">
-            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase;">Nomor HP</div>
+            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase;" data-id="Nomor HP" data-en="Phone Number">Nomor HP</div>
             <div class="pay-number" id="dana-num">0812-7949-9478</div>
             <div style="font-size:12px; color:var(--text-muted); margin-bottom:16px;">A/n <b>Agustian Pratama</b></div>
-            <button class="btn-copy" onclick="copyText('dana-num', '[OK] Nomor DANA disalin!')">Copy Number</button>
+            <button class="btn-copy" onclick="copyText('dana-num', '[OK] Nomor DANA disalin!')" data-id="Salin Nomor" data-en="Copy Number">Salin Nomor</button>
           </div>
         </div>
       </div>
 
       <div class="pay-info-box">
         <div style="font-size: 20px;">💡</div>
-        <div>
+        <div data-id="<strong>PENTING:</strong> Kirim screenshot bukti transfer ke Admin Telegram atau WhatsApp." data-en="<strong>IMPORTANT:</strong> Send the transfer receipt screenshot to Admin Telegram or WhatsApp.">
           <strong>PENTING:</strong> Kirim screenshot bukti transfer ke Admin Telegram atau WhatsApp.
         </div>
       </div>
@@ -961,27 +1084,27 @@
 
     <!-- TESTIMONI -->
     <div id="testimoni" class="tab-content">
-      <h2 class="section-title">Ulasan</h2>
-      <p class="section-sub">Pengalaman dari pelanggan.</p>
+      <h2 class="section-title" data-id="Ulasan" data-en="Reviews">Ulasan</h2>
+      <p class="section-sub" data-id="Pengalaman dari pelanggan." data-en="Experiences from customers.">Pengalaman dari pelanggan.</p>
 
       <div class="testimonial-form">
-        <div style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Tulis Testimoni</div>
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 12px;" data-id="Tulis Testimoni" data-en="Write a Review">Tulis Testimoni</div>
         <form id="testimonialForm" onsubmit="submitTestimonial(event)">
           <div class="form-group">
-            <label class="form-label">Nama / Username</label>
+            <label class="form-label" data-id="Nama / Username" data-en="Name / Username">Nama / Username</label>
             <input type="text" class="form-control" id="testiNama" placeholder="@username" required maxlength="30">
           </div>
           <div class="form-group">
-            <label class="form-label">Rating</label>
+            <label class="form-label" data-id="Rating" data-en="Rating">Rating</label>
             <div class="star-rating" id="starRating">
               <span data-value="1">★</span><span data-value="2">★</span><span data-value="3">★</span><span data-value="4">★</span><span data-value="5">★</span>
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label">Testimoni</label>
-            <textarea class="form-control" id="testiText" rows="2" placeholder="Pengalaman Anda..." required maxlength="300"></textarea>
+            <label class="form-label" data-id="Testimoni" data-en="Review">Testimoni</label>
+            <textarea class="form-control" id="testiText" rows="2" placeholder="Pengalaman Anda... / Your experience..." required maxlength="300"></textarea>
           </div>
-          <button type="submit" class="btn-submit" style="margin-top: 10px;">Kirim</button>
+          <button type="submit" class="btn-submit" style="margin-top: 10px;" data-id="Kirim" data-en="Send">Kirim</button>
           <div class="form-feedback" id="testiFeedback"></div>
         </form>
       </div>
@@ -992,30 +1115,32 @@
     <!-- FAQ -->
     <div id="faq" class="tab-content">
       <h2 class="section-title">FAQ</h2>
-      <p class="section-sub">Pertanyaan umum.</p>
+      <p class="section-sub" data-id="Pertanyaan umum." data-en="Frequently asked questions.">Pertanyaan umum.</p>
 
       <div class="faq-item" onclick="toggleFaq(this)">
-        <button class="faq-question">Aman? Butuh password?</button>
-        <div class="faq-answer">100% AMAN. Tidak butuh password. Hanya butuh link profil atau link postingan.</div>
+        <button class="faq-question" data-id="Aman? Butuh password?" data-en="Safe? Need a password?">Aman? Butuh password?</button>
+        <div class="faq-answer" data-id="100% AMAN. Tidak butuh password. Hanya butuh link profil atau link postingan." data-en="100% SAFE. No password needed. Only need profile link or post link.">100% AMAN. Tidak butuh password. Hanya butuh link profil atau link postingan.</div>
       </div>
       <div class="faq-item" onclick="toggleFaq(this)">
-        <button class="faq-question">Berapa lama prosesnya?</button>
-        <div class="faq-answer">Dikerjakan REAL HUMAN (bukan bot), proses bertahap. Admin akan memberi estimasi setelah order dikonfirmasi.</div>
+        <button class="faq-question" data-id="Berapa lama prosesnya?" data-en="How long does it take?">Berapa lama prosesnya?</button>
+        <div class="faq-answer" data-id="Dikerjakan REAL HUMAN (bukan bot), proses bertahap. Admin akan memberi estimasi setelah order dikonfirmasi." data-en="Done by REAL HUMANS (not bots), gradual process. Admin will give an estimate after the order is confirmed.">Dikerjakan REAL HUMAN (bukan bot), proses bertahap. Admin akan memberi estimasi setelah order dikonfirmasi.</div>
       </div>
       <div class="faq-item" onclick="toggleFaq(this)">
-        <button class="faq-question">Minimal order?</button>
-        <div class="faq-answer">Minimal order Rp 5.000. Bisa kombinasi beberapa layanan.</div>
+        <button class="faq-question" data-id="Minimal order?" data-en="Minimum order?">Minimal order?</button>
+        <div class="faq-answer" data-id="Minimal order Rp 5.000. Bisa kombinasi beberapa layanan." data-en="Minimum order Rp 5,000. Can combine several services.">Minimal order Rp 5.000. Bisa kombinasi beberapa layanan.</div>
       </div>
       <div class="faq-item" onclick="toggleFaq(this)">
-        <button class="faq-question">Metode pembayaran?</button>
-        <div class="faq-answer">Transfer Bank BCA dan E-Wallet DANA. Nomor lengkap ada di menu "Pembayaran".</div>
+        <button class="faq-question" data-id="Metode pembayaran?" data-en="Payment methods?">Metode pembayaran?</button>
+        <div class="faq-answer" data-id="Transfer Bank BCA dan E-Wallet DANA. Nomor lengkap ada di menu Pembayaran." data-en="BCA Bank Transfer and DANA E-Wallet. Full numbers are in the Payment menu.">Transfer Bank BCA dan E-Wallet DANA. Nomor lengkap ada di menu "Pembayaran".</div>
       </div>
     </div>
 
     <!-- TENTANG KAMI -->
     <div class="about-box">
-      <h3>Tentang Retjeh Store</h3>
-      <p>Retjeh Store adalah layanan jasa sosial media yang berfokus pada <strong>kualitas dan keamanan akun</strong>. Kami menggunakan tenaga manusia asli (real human) untuk setiap pesanan. Hal ini memastikan setiap interaksi terlihat natural dan meminimalisir risiko pembatasan dari platform.</p>
+      <h3 data-id="Tentang Retjeh Store" data-en="About Retjeh Store">Tentang Retjeh Store</h3>
+      <p data-id="Retjeh Store adalah layanan jasa sosial media yang berfokus pada kualitas dan keamanan akun. Kami menggunakan tenaga manusia asli (real human) untuk setiap pesanan. Hal ini memastikan setiap interaksi terlihat natural dan meminimalisir risiko pembatasan dari platform." data-en="Retjeh Store is a social media service focused on account quality and security. We use real humans for every order. This ensures every interaction looks natural and minimizes the risk of platform restrictions.">
+        Retjeh Store adalah layanan jasa sosial media yang berfokus pada <strong>kualitas dan keamanan akun</strong>. Kami menggunakan tenaga manusia asli (real human) untuk setiap pesanan. Hal ini memastikan setiap interaksi terlihat natural dan meminimalisir risiko pembatasan dari platform.
+      </p>
     </div>
 
     <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border-glass); text-align: center; color: var(--text-muted); font-size: 11px;">
@@ -1030,9 +1155,68 @@
 <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
 
 <script>
-  // KONFIGURASI
+  // KONFIGURASI (Ganti dengan Token & ID Channel Baru Anda)
   const TG_BOT_TOKEN = "9122151061:AAEXxMjlrQspl7EOC815YL4iekiInPTVu9s";
-  const TG_CHAT_ID   = "-1004438576894";
+  const TG_CHAT_ID   = "-1004438576894"; // ID Channel CryptoRetjeh
+
+  // ============================================================
+  // FITUR BAHASA (ID / EN) - DIPERBAIKI
+  // ============================================================
+  let currentLang = localStorage.getItem('retjeh_lang') || 'id';
+  
+  function setLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('retjeh_lang', lang);
+    
+    // Ganti teks tombol
+    document.getElementById('langBtn').innerText = lang === 'id' ? 'EN' : 'ID';
+    
+    // Loop semua elemen yang punya atribut data-id dan data-en
+    document.querySelectorAll('[data-id]').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if (text) {
+        if (el.tagName === 'OPTION') {
+          el.textContent = text;
+        } else {
+          el.innerHTML = text;
+        }
+      }
+    });
+
+    // Ganti placeholder form
+    document.getElementById('jumlah').placeholder = lang === 'id' ? 'Contoh: 1000' : 'Example: 1000';
+    document.getElementById('nama').placeholder = lang === 'id' ? 'Nama Anda' : 'Your Name';
+    document.getElementById('testiText').placeholder = lang === 'id' ? 'Pengalaman Anda...' : 'Your experience...';
+  }
+
+  function toggleLang() {
+    setLanguage(currentLang === 'id' ? 'en' : 'id');
+  }
+
+  // ============================================================
+  // FITUR MINIMIZE MENU MOBILE
+  // ============================================================
+  function toggleMenuMobile() {
+    const menu = document.getElementById('sidebarMenu');
+    const btn = document.getElementById('minimizeBtn');
+    menu.classList.toggle('collapsed');
+    
+    if (menu.classList.contains('collapsed')) {
+      btn.innerText = '▲'; // Panah ke atas (buka)
+    } else {
+      btn.innerText = '▼'; // Panah ke bawah (tutup)
+    }
+  }
+
+  // ============================================================
+  // INITIALIZATION
+  // ============================================================
+  document.addEventListener('DOMContentLoaded', () => {
+    setLanguage(currentLang); // Jalankan set bahasa saat load
+    renderTestimonials();
+    hitungTotal();
+    document.getElementById('orderIdDisplay').textContent = generateOrderId();
+  });
 
   function generateOrderId() {
     var now = new Date();
@@ -1042,7 +1226,6 @@
     var r = Math.floor(Math.random()*9000)+1000;
     return y+m+d+"-"+r;
   }
-  document.getElementById('orderIdDisplay').textContent = generateOrderId();
 
   function openTab(tabName, btn) {
     var contents = document.getElementsByClassName("tab-content");
@@ -1099,7 +1282,7 @@
 
     if (total > 0 && total < 5000) {
       totalEl.style.color = 'var(--gold)';
-      totalEl.textContent += ' (min 5rb)';
+      totalEl.textContent += currentLang === 'id' ? ' (min 5rb)' : ' (min 5k)';
     } else {
       totalEl.style.color = 'var(--accent)';
     }
@@ -1133,24 +1316,24 @@
       body: JSON.stringify({ chat_id: TG_CHAT_ID, text: pesan, parse_mode: "HTML" })
     }).then(res => res.json()).then(data => {
       if (data.ok) {
-        showToast("Order Terkirim!");
+        showToast(currentLang === 'id' ? "Order Terkirim ke Channel!" : "Order Sent to Channel!");
         document.getElementById("orderForm").reset();
         document.getElementById("totalHarga").textContent = 'Rp 0';
         document.getElementById("orderIdDisplay").textContent = generateOrderId();
         setTimeout(function() {
-          if (confirm("Order #RS-" + orderId + " terkirim.\nBuka WhatsApp untuk backup?")) {
+          if (confirm((currentLang === 'id' ? "Order #RS-" : "Order #RS-") + orderId + (currentLang === 'id' ? " terkirim.\nBuka WhatsApp untuk backup?" : " sent.\nOpen WhatsApp for backup?"))) {
             var waMsg = encodeURIComponent("*HALO ADMIN* 👋\nID: #RS-" + orderId + "\nPlatform: " + platform + "\nLayanan: " + layanan + "\nJumlah: " + jumlah + "\nTotal: " + totalText + "\nLink: " + link);
             window.open("https://wa.me/6281279499478?text=" + waMsg, "_blank");
           }
         }, 300);
       } else {
-        showToast("Gagal kirim, coba lagi.", true);
+        showToast(currentLang === 'id' ? "Gagal kirim, coba lagi." : "Failed to send, try again.", true);
       }
     }).catch(() => {
-      showToast("Error jaringan, beralih ke WA...", true);
+      showToast(currentLang === 'id' ? "Error jaringan, beralih ke WA..." : "Network error, switching to WA...", true);
       var waMsg = encodeURIComponent("*HALO ADMIN* 👋\nID: #RS-" + orderId + "\nPlatform: " + platform + "\nLayanan: " + layanan + "\nJumlah: " + jumlah + "\nTotal: " + totalText + "\nLink: " + link);
       window.open("https://wa.me/6281279499478?text=" + waMsg, "_blank");
-    }).finally(() => { btn.disabled = false; btn.innerHTML = "SEND ORDER"; });
+    }).finally(() => { btn.disabled = false; btn.innerHTML = currentLang === 'id' ? 'KIRIM ORDER' : 'SEND ORDER'; });
   }
 
   function toggleFaq(element) {
@@ -1197,7 +1380,7 @@
     localStorage.setItem(TESTI_KEY, JSON.stringify(list));
     renderTestimonials();
     document.getElementById('testimonialForm').reset();
-    showToast("Testimoni Terkirim!");
+    showToast(currentLang === 'id' ? "Testimoni Terkirim!" : "Review Sent!");
   }
 
   window.onscroll = function() {
@@ -1205,9 +1388,7 @@
     if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) btn.classList.add("show");
     else btn.classList.remove("show");
   };
-
-  document.addEventListener('DOMContentLoaded', function() { renderTestimonials(); hitungTotal(); });
 </script>
 
 </body>
-                               </html>
+  </html>
