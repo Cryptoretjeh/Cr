@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Retjeh Store — Jasa Sosmed Manual</title>
-<meta name="description" content="Retjeh Store — Jasa sosial media manual (real human, bukan bot). Telegram, TikTok, Instagram, YouTube, Facebook, X.">
+<meta name="description" content="Retjeh Store — Jasa sosial media manual (real human, bukan bot).">
 <meta name="theme-color" content="#00ffa3">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%2300ffa3'>R</text></svg>">
 
@@ -18,7 +18,7 @@
      ============================================================ */
   :root {
     --bg-base: #050806;
-    --bg-glass: rgba(10, 18, 14, 0.95);
+    --bg-glass: rgba(10, 18, 14, 0.85); /* Sedikit transparan agar background terlihat */
     --bg-card: rgba(16, 28, 22, 0.95);
     --border-glass: rgba(255, 255, 255, 0.08);
     --border-hover: rgba(0, 255, 163, 0.4);
@@ -33,9 +33,9 @@
     --gold: #ffb800;
     --wa: #25D366;
     
-    --r-sm: 10px;
-    --r-md: 16px;
-    --r-lg: 24px;
+    --r-sm: 8px;
+    --r-md: 14px;
+    --r-lg: 20px;
     
     --sans: 'Plus Jakarta Sans', system-ui, sans-serif;
     --display: 'Space Grotesk', system-ui, sans-serif;
@@ -50,20 +50,19 @@
     font-family: var(--sans);
     background-color: var(--bg-base);
     color: var(--text-main);
-    line-height: 1.6;
-    font-size: 14px;
+    line-height: 1.5;
+    font-size: 13px;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
     min-height: 100vh;
   }
 
-  /* BACKGROUND GAMBAR */
+  /* BACKGROUND HALAMAN UTAMA */
   body::before {
     content: "";
     position: fixed; inset: 0; z-index: -2;
     background: linear-gradient(135deg, #020504 0%, #06120d 100%);
   }
-  
   body::after {
     content: "";
     position: fixed; inset: 0; z-index: -1;
@@ -71,7 +70,7 @@
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    opacity: 0.4; 
+    opacity: 0.5; /* Dinaikkan agar gambar lebih terlihat */
     filter: brightness(0.8) contrast(1.1); 
     pointer-events: none;
   }
@@ -80,15 +79,15 @@
   button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
   /* ============================================================
-     LAYOUT DASAR
+     LAYOUT
      ============================================================ */
   .app-container { display: flex; min-height: 100vh; }
 
   /* ============================================================
-     SIDEBAR
+     SIDEBAR (DESKTOP)
      ============================================================ */
   .sidebar {
-    width: 260px;
+    width: 220px;
     background: var(--bg-glass);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
@@ -98,11 +97,10 @@
     position: fixed;
     height: 100vh;
     z-index: 40;
-    box-shadow: 4px 0 24px rgba(0,0,0,0.5);
   }
 
   .brand {
-    padding: 24px 16px;
+    padding: 20px 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -111,25 +109,22 @@
     background: rgba(0,0,0,0.3);
   }
   
-  /* FOTO PROFIL DARI LOGO.JPG GITHUB */
   .profile-pic {
-    width: 80px;
-    height: 80px;
+    width: 65px;
+    height: 65px;
     border-radius: 50%;
-    border: 3px solid var(--accent);
-    padding: 3px;
-    margin-bottom: 12px;
-    box-shadow: 0 0 20px var(--accent-glow);
+    border: 2px solid var(--accent);
+    padding: 2px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 15px var(--accent-glow);
     object-fit: cover;
     background: #000;
-    transition: transform 0.3s ease;
   }
-  .profile-pic:hover { transform: scale(1.05); }
   
   .brand-text {
     font-family: var(--display);
     font-weight: 700;
-    font-size: 18px;
+    font-size: 15px;
     color: var(--text-main);
     line-height: 1.2;
   }
@@ -137,93 +132,82 @@
   .brand-text small {
     display: block;
     font-family: var(--sans);
-    font-size: 10px;
+    font-size: 9px;
     color: var(--accent);
     font-weight: 800;
-    margin-top: 4px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
+    margin-top: 2px;
+    letter-spacing: 1px;
   }
 
   .sidebar-menu {
-    padding: 12px 10px;
+    padding: 10px 8px;
     flex: 1;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
   }
-  .sidebar-menu::-webkit-scrollbar { width: 4px; }
-  .sidebar-menu::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+  .sidebar-menu::-webkit-scrollbar { width: 3px; }
+  .sidebar-menu::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
 
   .menu-label {
-    font-family: var(--sans);
-    font-size: 10px;
+    font-size: 9px;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--text-muted);
     font-weight: 800;
-    margin: 16px 0 4px 8px;
+    margin: 12px 0 4px 8px;
   }
-  .menu-label:first-child { margin-top: 4px; }
 
   .menu-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
+    gap: 8px;
+    padding: 8px 10px;
     border-radius: var(--r-sm);
     color: var(--text-muted);
     font-weight: 600;
-    font-size: 13px;
-    transition: all 0.2s ease;
+    font-size: 12px;
+    transition: all 0.2s;
     width: 100%;
     text-align: left;
     border: 1px solid transparent;
   }
   
-  .menu-item:hover {
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--text-main);
-  }
-  
+  .menu-item:hover { background: rgba(255, 255, 255, 0.06); color: var(--text-main); }
   .menu-item.active {
     background: var(--accent-gradient);
     color: #000;
     border-color: var(--accent);
-    box-shadow: 0 4px 16px var(--accent-glow);
+    box-shadow: 0 4px 12px var(--accent-glow);
   }
 
   .icon-wrap {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     display: grid;
     place-items: center;
-    border-radius: 6px;
+    border-radius: 4px;
     background: rgba(255, 255, 255, 0.1);
-    font-size: 12px;
-    transition: all 0.2s;
+    font-size: 10px;
   }
-  
   .menu-item.active .icon-wrap { background: rgba(0, 0, 0, 0.15); }
 
   .count {
     margin-left: auto;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 800;
-    padding: 2px 8px;
-    border-radius: 8px;
+    padding: 1px 6px;
+    border-radius: 6px;
     background: rgba(255, 255, 255, 0.15);
   }
-  .menu-item.active .count { background: rgba(0,0,0,0.15); }
 
-  /* TOMBOL KONTAK */
   .sidebar-footer {
-    padding: 12px;
+    padding: 10px;
     border-top: 1px solid var(--border-glass);
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
     background: rgba(0,0,0,0.3);
   }
   
@@ -233,51 +217,46 @@
     justify-content: center;
     gap: 6px;
     width: 100%;
-    padding: 10px;
+    padding: 8px;
     border-radius: var(--r-sm);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     transition: all 0.2s;
     cursor: pointer;
     position: relative;
     z-index: 50;
-    text-decoration: none;
   }
-  
   .btn-tg { background: rgba(0, 184, 255, 0.15); color: #00b8ff; border: 1px solid rgba(0, 184, 255, 0.4); }
-  .btn-tg:hover { background: rgba(0, 184, 255, 0.3); }
-  
   .btn-wa { background: rgba(37, 211, 102, 0.15); color: var(--wa); border: 1px solid rgba(37, 211, 102, 0.4); }
-  .btn-wa:hover { background: rgba(37, 211, 102, 0.3); }
 
   /* ============================================================
      MAIN CONTENT
      ============================================================ */
   .main-content {
     flex: 1;
-    margin-left: 260px;
-    padding: 30px 36px;
-    max-width: 1250px;
+    margin-left: 220px;
+    padding: 24px 30px;
+    max-width: 1300px;
     position: relative;
     z-index: 1;
   }
 
   /* ============================================================
-     HERO BANNER
+     BANNER
      ============================================================ */
   .banner {
     width: 100%;
-    min-height: 280px;
+    min-height: 240px;
     border-radius: var(--r-lg);
     position: relative;
     overflow: hidden;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     border: 1px solid var(--border-glass);
     box-shadow: var(--shadow-md);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 40px;
+    padding: 30px;
   }
 
   .banner::before {
@@ -297,398 +276,300 @@
     z-index: 1;
   }
 
-  .banner-content {
-    position: relative;
-    z-index: 2;
-    max-width: 600px;
-  }
+  .banner-content { position: relative; z-index: 2; max-width: 550px; }
 
   .banner-tag {
     display: inline-block;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 800;
     letter-spacing: 1px;
     color: #000;
-    padding: 6px 16px;
-    margin-bottom: 16px;
+    padding: 5px 12px;
+    margin-bottom: 12px;
     border-radius: 100px;
     background: var(--accent);
-    box-shadow: 0 4px 16px var(--accent-glow);
   }
 
   .banner h1 {
     font-family: var(--display);
-    font-size: 38px;
+    font-size: 32px;
     font-weight: 800;
-    margin-bottom: 12px;
-    letter-spacing: -1px;
+    margin-bottom: 10px;
     line-height: 1.1;
     color: #fff;
-    text-shadow: 0 4px 16px rgba(0,0,0,0.8);
   }
 
   .banner p {
     color: #d0e0d8;
-    font-size: 14px;
-    margin-bottom: 20px;
-    line-height: 1.6;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    font-size: 13px;
+    margin-bottom: 16px;
+    line-height: 1.5;
   }
 
-  /* FITUR BARU: TOMBOL AKSI CEPAT DI BANNER */
-  .banner-actions { display: flex; gap: 12px; margin-bottom: 24px; }
+  .banner-actions { display: flex; gap: 10px; margin-bottom: 16px; }
   .btn-quick {
-    padding: 10px 20px;
+    padding: 8px 16px;
     border-radius: var(--r-sm);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     transition: all 0.2s;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
   }
-  .btn-quick.primary { background: var(--accent); color: #000; box-shadow: 0 4px 16px var(--accent-glow); }
-  .btn-quick.primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
-  .btn-quick.secondary { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid var(--border-glass); backdrop-filter: blur(10px); }
+  .btn-quick.primary { background: var(--accent); color: #000; box-shadow: 0 4px 12px var(--accent-glow); }
+  .btn-quick.primary:hover { transform: translateY(-2px); }
+  .btn-quick.secondary { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid var(--border-glass); }
   .btn-quick.secondary:hover { background: rgba(255,255,255,0.2); }
 
-  .banner-features { display: flex; flex-wrap: wrap; gap: 10px; }
-  
+  .banner-features { display: flex; flex-wrap: wrap; gap: 8px; }
   .banner-features span {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 8px 14px;
-    border-radius: 100px;
-    border: 1px solid rgba(255,255,255,0.15);
-    color: #fff;
-    font-size: 12px;
-    font-weight: 600;
+    display: flex; align-items: center; gap: 4px;
+    background: rgba(0, 0, 0, 0.6); padding: 5px 10px;
+    border-radius: 100px; border: 1px solid rgba(255,255,255,0.15);
+    color: #fff; font-size: 10px; font-weight: 600;
   }
 
   /* ============================================================
      STATUS BAR
      ============================================================ */
   .status-bar {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: var(--bg-card);
-    border: 1px solid var(--border-glass);
-    padding: 16px 24px;
-    border-radius: var(--r-md);
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-bottom: 24px;
-    box-shadow: var(--shadow-sm);
+    display: flex; align-items: center; gap: 10px;
+    background: var(--bg-card); border: 1px solid var(--border-glass);
+    padding: 12px 20px; border-radius: var(--r-md);
+    font-size: 12px; color: var(--text-muted);
+    margin-bottom: 20px;
   }
   
   .status-dot {
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 12px var(--accent);
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 10px var(--accent);
     flex-shrink: 0;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(0, 255, 163, 0.6); }
-    70% { box-shadow: 0 0 0 8px rgba(0, 255, 163, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(0, 255, 163, 0); }
   }
   
-  .id-lead { margin-left: auto; font-size: 12px; white-space: nowrap; color: #fff; font-weight: 600; }
+  .id-lead { margin-left: auto; font-size: 11px; color: #fff; font-weight: 600; }
   .id-lead b { color: var(--accent); }
 
   /* ============================================================
-     TAB CONTENT & PANELS
+     TAB CONTENT
      ============================================================ */
   .tab-content { display: none; }
   .tab-content.active { display: block; animation: fadeIn 0.3s ease forwards; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-  .section-title { font-family: var(--display); font-size: 24px; font-weight: 700; margin-bottom: 6px; color: var(--text-main); }
-  .section-sub { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
+  .section-title { font-family: var(--display); font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .section-sub { color: var(--text-muted); font-size: 12px; margin-bottom: 16px; }
 
   .panel {
-    background: var(--bg-card);
-    border: 1px solid var(--border-glass);
-    border-radius: var(--r-md);
-    overflow: hidden;
-    margin-bottom: 24px;
-    box-shadow: var(--shadow-md);
-    transition: border-color 0.3s;
+    background: var(--bg-card); border: 1px solid var(--border-glass);
+    border-radius: var(--r-md); overflow: hidden;
+    margin-bottom: 20px; box-shadow: var(--shadow-md);
   }
-  .panel:hover { border-color: var(--border-hover); }
 
   .panel-header {
-    padding: 20px 28px;
-    border-bottom: 1px solid var(--border-glass);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-glass);
+    display: flex; justify-content: space-between; align-items: center;
     background: rgba(0, 0, 0, 0.3);
   }
-  
-  .panel-title { font-family: var(--display); font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 10px; color: var(--text-main); }
+  .panel-title { font-family: var(--display); font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
 
   .badge {
-    font-size: 10px;
-    font-weight: 800;
-    padding: 4px 12px;
-    border-radius: 100px;
-    background: rgba(0, 255, 163, 0.15);
-    color: var(--accent);
-    border: 1px solid rgba(0, 255, 163, 0.4);
-    letter-spacing: 0.5px;
+    font-size: 9px; font-weight: 800; padding: 3px 10px;
+    border-radius: 100px; background: rgba(0, 255, 163, 0.15);
+    color: var(--accent); border: 1px solid rgba(0, 255, 163, 0.4);
   }
 
   table { width: 100%; border-collapse: collapse; text-align: left; }
-  th, td { padding: 16px 28px; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 13px; }
+  th, td { padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12px; }
   th {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text-muted);
-    font-weight: 800;
-    background: rgba(0, 0, 0, 0.4);
+    font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--text-muted); font-weight: 800; background: rgba(0, 0, 0, 0.4);
   }
-  tr:last-child td { border-bottom: none; }
   tr:hover td { background: rgba(255, 255, 255, 0.03); }
-  .price-col { font-weight: 800; color: var(--accent); font-size: 14px; }
+  .price-col { font-weight: 800; color: var(--accent); }
 
   /* ============================================================
-     FORM ORDER & PEMBAYARAN
+     FORM & PEMBAYARAN
      ============================================================ */
-  .form-group { margin-bottom: 20px; }
-  .form-label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
+  .form-group { margin-bottom: 16px; }
+  .form-label { display: block; font-size: 11px; font-weight: 700; margin-bottom: 6px; color: var(--text-main); }
   
   .form-control {
-    width: 100%;
-    padding: 14px;
-    border-radius: var(--r-sm);
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid var(--border-glass);
-    color: var(--text-main);
-    font-family: var(--sans);
-    font-size: 13px;
-    transition: all 0.2s;
+    width: 100%; padding: 12px; border-radius: var(--r-sm);
+    background: rgba(0, 0, 0, 0.5); border: 1px solid var(--border-glass);
+    color: var(--text-main); font-family: var(--sans); font-size: 12px;
   }
-  .form-control:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(0, 255, 163, 0.15);
+  .form-control:focus { outline: none; border-color: var(--accent); }
+
+  .order-steps {
+    display: flex; gap: 12px; margin-bottom: 20px;
+    background: rgba(255,255,255,0.03); padding: 12px;
+    border-radius: var(--r-sm); border: 1px solid var(--border-glass);
   }
-  .form-control::placeholder { color: #6b8577; }
-  
-  select.form-control {
-    cursor: pointer;
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%239eb5a8%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-    background-repeat: no-repeat;
-    background-position: right 16px top 50%;
-    background-size: 12px auto;
-  }
-  select.form-control option { background: #0f1c17; color: var(--text-main); }
+  .step-item { flex: 1; }
+  .step-num { font-size: 16px; font-weight: 800; color: var(--accent); }
+  .step-text { font-size: 10px; font-weight: 600; color: var(--text-muted); }
 
   .price-total-box {
-    margin-top: 12px;
-    padding: 16px 24px;
-    background: rgba(0, 255, 163, 0.08);
-    border: 1px solid rgba(0, 255, 163, 0.3);
-    border-radius: var(--r-sm);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    margin-top: 10px; padding: 14px 20px;
+    background: rgba(0, 255, 163, 0.08); border: 1px solid rgba(0, 255, 163, 0.3);
+    border-radius: var(--r-sm); display: flex; justify-content: space-between; align-items: center;
   }
-  .price-total-box .label { font-size: 13px; color: var(--text-muted); font-weight: 600; }
-  .price-total-box .value { font-size: 22px; font-weight: 800; color: var(--accent); }
+  .price-total-box .value { font-size: 20px; font-weight: 800; color: var(--accent); }
 
   .btn-submit {
-    width: 100%;
-    padding: 16px;
-    border-radius: var(--r-sm);
-    background: var(--accent-gradient);
-    color: #000;
-    font-weight: 800;
-    font-size: 14px;
-    letter-spacing: 0.5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+    width: 100%; padding: 14px; border-radius: var(--r-sm);
+    background: var(--accent-gradient); color: #000;
+    font-weight: 800; font-size: 13px; letter-spacing: 0.5px;
+    margin-top: 20px; box-shadow: 0 4px 16px rgba(0, 255, 163, 0.3);
     transition: all 0.2s;
-    margin-top: 24px;
-    box-shadow: 0 6px 20px rgba(0, 255, 163, 0.3);
   }
-  .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0, 255, 163, 0.4); }
-  .btn-submit:disabled { opacity: 0.7; cursor: wait; transform: none; }
+  .btn-submit:hover { transform: translateY(-2px); }
 
-  /* FITUR BARU: PANDUAN ALUR ORDER */
-  .order-steps {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 24px;
-    background: rgba(255,255,255,0.03);
-    padding: 16px;
-    border-radius: var(--r-sm);
-    border: 1px solid var(--border-glass);
-  }
-  .step-item { flex: 1; display: flex; flex-direction: column; gap: 4px; }
-  .step-num { font-size: 20px; font-weight: 800; color: var(--accent); font-family: var(--display); }
-  .step-text { font-size: 12px; font-weight: 600; color: var(--text-muted); }
-
-  /* GRID PEMBAYARAN */
-  .pay-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-  .pay-card { border-radius: var(--r-md); background: var(--bg-card); border: 1px solid var(--border-glass); box-shadow: var(--shadow-sm); transition: all 0.3s; overflow: hidden; }
-  .pay-card:hover { transform: translateY(-4px); border-color: var(--border-hover); box-shadow: var(--shadow-md); }
-  .pay-card-header { padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-glass); }
-  .pay-card-header.bca { background: linear-gradient(135deg, rgba(0,96,175,0.3), rgba(0,0,0,0.2)); }
-  .pay-card-header.dana { background: linear-gradient(135deg, rgba(17,142,234,0.3), rgba(0,0,0,0.2)); }
-  .pay-brand-logo { font-weight: 800; font-size: 20px; letter-spacing: 1px; display: flex; align-items: center; gap: 6px; }
-  .pay-brand-logo.bca-logo { color: #6ec2ff; }
-  .pay-brand-logo.dana-logo { color: #4dd0ff; }
-  .pay-verified { font-size: 9px; font-weight: 800; padding: 4px 10px; background: rgba(0, 255, 163, 0.15); color: var(--accent); border-radius: 100px; display: flex; align-items: center; gap: 4px; }
-  .pay-card-body { padding: 24px; }
-  .pay-label-small { font-size: 11px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-  .pay-number { font-size: 24px; font-weight: 800; font-family: var(--display); letter-spacing: 1px; color: var(--text-main); margin-bottom: 6px; }
-  .pay-name { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
-  .pay-name strong { color: var(--text-main); font-weight: 700; }
+  .pay-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+  .pay-card { background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--r-md); overflow: hidden; }
+  .pay-card-header { padding: 16px 20px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-glass); }
+  .pay-card-header.bca { background: rgba(0,96,175,0.3); }
+  .pay-card-header.dana { background: rgba(17,142,234,0.3); }
+  .pay-card-body { padding: 20px; }
+  .pay-number { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
   .btn-copy {
-    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-    width: 100%; background: rgba(255, 255, 255, 0.06); border: 1px solid var(--border-glass);
-    padding: 12px; border-radius: var(--r-sm); font-size: 12px; font-weight: 700;
-    color: var(--text-main); transition: all 0.2s;
+    display: block; width: 100%; text-align: center; background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-glass); padding: 10px; border-radius: var(--r-sm);
+    font-size: 11px; font-weight: 700; margin-top: 12px;
   }
-  .btn-copy:hover { background: var(--accent); color: #000; border-color: var(--accent); }
 
   .pay-info-box {
-    margin-top: 24px; background: rgba(255, 184, 0, 0.08); border: 1px solid rgba(255, 184, 0, 0.3);
-    padding: 20px; border-radius: var(--r-md); font-size: 13px; color: var(--text-main);
-    display: flex; gap: 14px; line-height: 1.6;
+    margin-top: 20px; background: rgba(255, 184, 0, 0.08);
+    border: 1px solid rgba(255, 184, 0, 0.3); padding: 16px;
+    border-radius: var(--r-md); font-size: 12px; display: flex; gap: 12px;
   }
-  .pay-info-box .info-icon { font-size: 24px; flex-shrink: 0; }
-  .pay-info-box strong { color: var(--gold); }
 
   /* ============================================================
      TESTIMONI & FAQ
      ============================================================ */
-  .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-  .testi-card { background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--r-md); padding: 24px; transition: all 0.3s; }
-  .testi-card:hover { border-color: var(--border-hover); transform: translateY(-3px); }
-  .testi-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-  .testi-avatar { width: 46px; height: 46px; border-radius: 50%; background: var(--accent-gradient); display: grid; place-items: center; font-family: var(--display); font-weight: 700; color: #000; font-size: 18px; }
-  .testi-name { font-weight: 700; font-size: 14px; color: var(--text-main); }
-  .testi-date { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
-  .testi-stars { color: var(--gold); font-size: 16px; margin-bottom: 12px; letter-spacing: 1px; }
-  .testi-text { font-size: 13px; color: #d0e0d8; line-height: 1.7; }
-  
-  .testimonial-form { background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--r-md); padding: 24px; margin-bottom: 24px; }
-  .star-rating { display: flex; gap: 8px; margin-bottom: 8px; }
-  .star-rating span { font-size: 26px; color: #3b5246; cursor: pointer; transition: color 0.2s, transform 0.2s; }
+  .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .testi-card { background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--r-md); padding: 20px; }
+  .testi-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .testi-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--accent-gradient); display: grid; place-items: center; font-weight: 800; color: #000; }
+  .testi-text { font-size: 12px; color: #d0e0d8; line-height: 1.6; }
+  .testimonial-form { background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--r-md); padding: 20px; margin-bottom: 20px; }
+  .star-rating span { font-size: 22px; color: #3b5246; cursor: pointer; }
   .star-rating span.active { color: var(--gold); }
-  .star-rating span:hover { transform: scale(1.1); }
-  .form-feedback { margin-top: 12px; font-size: 13px; color: var(--accent); font-weight: 700; opacity: 0; transition: opacity 0.3s; }
-  .form-feedback.show { opacity: 1; }
-
-  .faq-item { background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--r-md); margin-bottom: 12px; overflow: hidden; transition: border-color 0.3s; }
-  .faq-item:hover { border-color: var(--border-hover); }
-  .faq-question { width: 100%; text-align: left; padding: 20px 24px; font-weight: 700; font-size: 14px; display: flex; justify-content: space-between; align-items: center; color: var(--text-main); }
-  .faq-question::after { content: "+"; font-size: 20px; color: var(--text-muted); font-weight: 400; }
-  .faq-item.active .faq-question::after { content: "−"; color: var(--accent); }
-  .faq-answer { display: none; padding: 0 24px 20px 24px; font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+  
+  .faq-item { background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--r-md); margin-bottom: 10px; }
+  .faq-question { width: 100%; text-align: left; padding: 16px 20px; font-weight: 700; font-size: 13px; color: var(--text-main); display: flex; justify-content: space-between; }
+  .faq-answer { display: none; padding: 0 20px 16px 20px; font-size: 12px; color: var(--text-muted); }
   .faq-item.active .faq-answer { display: block; }
 
-  .about-box { background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--r-md); padding: 28px; margin-top: 32px; box-shadow: var(--shadow-sm); }
-  .about-box h3 { font-family: var(--display); font-size: 20px; color: var(--text-main); margin-bottom: 12px; }
-  .about-box p { font-size: 13px; color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; }
+  .about-box { background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--r-md); padding: 24px; margin-top: 24px; }
+  .about-box h3 { font-size: 18px; margin-bottom: 8px; }
+  .about-box p { font-size: 12px; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px; }
 
   /* ============================================================
-     TOAST & FLOATING WA & SCROLL TOP
+     TOAST & FLOATING
      ============================================================ */
   .toast {
-    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px);
-    background: #10221a; color: var(--accent); padding: 14px 28px; border: 1px solid var(--accent);
-    border-radius: var(--r-sm); font-weight: 700; font-size: 13px; opacity: 0; visibility: hidden;
-    transition: all 0.3s; z-index: 9999; box-shadow: 0 8px 32px rgba(0, 255, 163, 0.2);
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: #10221a; color: var(--accent); padding: 12px 24px; border: 1px solid var(--accent);
+    border-radius: var(--r-sm); font-weight: 700; font-size: 12px; opacity: 0; visibility: hidden;
+    transition: all 0.3s; z-index: 9999;
   }
   .toast.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
-  .toast.error { color: #ff4d6d; border-color: #ff4d6d; box-shadow: 0 8px 32px rgba(255, 77, 109, 0.2); }
 
   .float-wa {
-    display: grid; position: fixed; bottom: 24px; right: 24px; width: 55px; height: 55px;
-    border-radius: 50%; background: var(--wa); color: #fff; font-size: 26px;
-    place-items: center; z-index: 9000; box-shadow: 0 8px 32px rgba(37, 211, 102, 0.4);
+    display: grid; position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px;
+    border-radius: 50%; background: var(--wa); color: #fff; font-size: 24px;
+    place-items: center; z-index: 9000; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
   }
 
-  /* FITUR BARU: SCROLL TO TOP */
   .scroll-top {
-    display: grid; position: fixed; bottom: 90px; right: 24px; width: 45px; height: 45px;
-    border-radius: 50%; background: rgba(255,255,255,0.1); color: #fff; font-size: 20px;
-    place-items: center; z-index: 8999; border: 1px solid var(--border-glass);
-    cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s;
-    backdrop-filter: blur(10px);
+    display: grid; position: fixed; bottom: 80px; right: 20px; width: 40px; height: 40px;
+    border-radius: 50%; background: rgba(255,255,255,0.1); color: #fff;
+    place-items: center; z-index: 8999; cursor: pointer; opacity: 0; visibility: hidden;
+    transition: all 0.3s; backdrop-filter: blur(10px);
   }
   .scroll-top.show { opacity: 1; visibility: visible; }
-  .scroll-top:hover { background: var(--accent); color: #000; }
 
   /* ============================================================
-     RESPONSIVE (MOBILE SANGAT RAPI)
+     RESPONSIVE (MOBILE)
      ============================================================ */
   @media (max-width: 900px) {
-    .main-content { padding: 20px; margin-left: 0; }
-    .banner { padding: 30px 20px; min-height: 240px; }
-    .banner h1 { font-size: 32px; }
+    .main-content { padding: 16px; margin-left: 0; }
+    .banner { padding: 20px; min-height: 200px; }
+    .banner h1 { font-size: 26px; }
   }
 
   @media (max-width: 768px) {
     .app-container { flex-direction: column; }
     
-    .sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid var(--border-glass); }
-    .brand { padding: 16px; flex-direction: row; text-align: left; gap: 16px; }
-    .profile-pic { width: 60px; height: 60px; margin-bottom: 0; }
-    .brand-text { font-size: 16px; }
+    /* AREA MENU MOBILE DENGAN BACKGROUND GAMBAR */
+    .sidebar { 
+      width: 100%; 
+      height: auto; 
+      position: sticky; 
+      top: 0;
+      border-right: none; 
+      
+      /* Efek Kaca + Gambar Background */
+      background-color: rgba(5, 8, 6, 0.85); /* Warna dasar gelap transparan */
+      background-image: url('https://raw.githubusercontent.com/Cryptoretjeh/Cr/main/page-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-blend-mode: overlay; /* Menyatukan gambar dengan warna gelap */
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.8); 
+      border-bottom: 1px solid var(--border-glass);
+    }
     
-    /* MENU MOBILE JADI GRID 3 KOLOM YANG RAPI */
+    .brand { 
+      padding: 12px 16px; 
+      flex-direction: row; 
+      text-align: left; 
+      gap: 12px; 
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      background: transparent; /* Biarkan background sidebar yang mengatur */
+    }
+    .profile-pic { width: 45px; height: 45px; margin-bottom: 0; border-width: 2px; }
+    .brand-text { font-size: 14px; }
+    
+    /* MENU MOBILE: 4 KOLOM */
     .sidebar-menu { 
       display: grid; 
-      grid-template-columns: repeat(3, 1fr); 
-      padding: 12px; 
-      gap: 8px; 
-      max-height: 400px; 
+      grid-template-columns: repeat(4, 1fr); 
+      padding: 8px 12px; 
+      gap: 6px; 
+      max-height: 180px; 
+      background: transparent;
     }
     .menu-label { display: none; }
     .menu-item { 
-      padding: 12px 6px; 
-      font-size: 11px; 
+      padding: 8px 4px; 
+      font-size: 9px; 
       flex-direction: column; 
       justify-content: center; 
       text-align: center; 
-      gap: 6px; 
-      border-radius: var(--r-sm); 
+      gap: 4px; 
       border: 1px solid var(--border-glass); 
-      background: rgba(0,0,0,0.2); 
+      background: rgba(0,0,0,0.5); /* Kotak menu tetap gelap agar teks tajam */
+      border-radius: 6px;
     }
-    .icon-wrap { width: 30px; height: 30px; font-size: 14px; margin-bottom: 2px;}
+    .icon-wrap { width: 22px; height: 22px; font-size: 11px; margin-bottom: 0;}
     .count { display: none; } 
     
-    .sidebar-footer { display: flex; flex-direction: row; gap: 10px; padding: 16px; }
+    .sidebar-footer { 
+      display: flex; 
+      flex-direction: row; 
+      gap: 8px; 
+      padding: 10px 12px; 
+      background: rgba(0,0,0,0.3);
+    }
+    .contact-btn { padding: 10px; font-size: 11px; }
     
-    .banner { min-height: auto; }
-    .banner p { font-size: 13px; }
-    .banner-features span { font-size: 11px; padding: 6px 12px; }
-
-    .panel { overflow-x: auto; }
-    th, td { white-space: nowrap; padding: 12px 16px; }
+    .status-bar { flex-wrap: wrap; padding: 10px 14px; margin-top: 10px; }
+    .status-bar .id-lead { margin-left: 0; width: 100%; margin-top: 4px; }
     
-    .pay-grid { grid-template-columns: 1fr; }
-    .testi-grid { grid-template-columns: 1fr; }
-    
-    .status-bar { flex-wrap: wrap; font-size: 12px; padding: 14px 16px; }
-    .status-bar .id-lead { margin-left: 0; width: 100%; margin-top: 8px; }
-
-    .order-steps { flex-direction: column; gap: 12px; }
+    .order-steps { flex-direction: column; gap: 8px; }
     .float-wa { display: grid; }
     .scroll-top { display: grid; }
   }
@@ -698,11 +579,10 @@
 
 <div class="app-container">
 
-  <!-- SIDEBAR -->
+  <!-- SIDEBAR / HEADER MOBILE -->
   <aside class="sidebar">
     <div class="brand">
-      <!-- FOTO PROFIL DARI LOGO.JPG GITHUB ANDA -->
-      <img src="https://raw.githubusercontent.com/Cryptoretjeh/Cr/main/logo.jpg" alt="Logo Retjeh Store" class="profile-pic">
+      <img src="https://raw.githubusercontent.com/Cryptoretjeh/Cr/main/logo.jpg" alt="Logo Retjeh" class="profile-pic">
       <div class="brand-text">
         Retjeh Store
         <small>Digital Services</small>
@@ -710,27 +590,27 @@
     </div>
 
     <nav class="sidebar-menu">
-      <div class="menu-label">Platform Sosmed</div>
+      <div class="menu-label">Sosmed</div>
       <button class="menu-item active" onclick="openTab('telegram', this)">
-        <span class="icon-wrap">✈️</span> Telegram <span class="count">4</span>
+        <span class="icon-wrap">✈️</span> Telegram
       </button>
       <button class="menu-item" onclick="openTab('tiktok', this)">
-        <span class="icon-wrap">🎵</span> TikTok <span class="count">5</span>
+        <span class="icon-wrap">🎵</span> TikTok
       </button>
       <button class="menu-item" onclick="openTab('x', this)">
-        <span class="icon-wrap">𝕏</span> X / Twitter <span class="count">4</span>
+        <span class="icon-wrap">𝕏</span> X / Twitter
       </button>
       <button class="menu-item" onclick="openTab('facebook', this)">
-        <span class="icon-wrap">📘</span> Facebook <span class="count">4</span>
+        <span class="icon-wrap">📘</span> Facebook
       </button>
       <button class="menu-item" onclick="openTab('instagram', this)">
-        <span class="icon-wrap">📸</span> Instagram <span class="count">4</span>
+        <span class="icon-wrap">📸</span> Instagram
       </button>
       <button class="menu-item" onclick="openTab('youtube', this)">
-        <span class="icon-wrap">▶️</span> YouTube <span class="count">4</span>
+        <span class="icon-wrap">▶️</span> YouTube
       </button>
 
-      <div class="menu-label" style="margin-top: 20px;">Menu Lainnya</div>
+      <div class="menu-label" style="margin-top: 8px;">Lainnya</div>
       <button class="menu-item" onclick="openTab('pkt-subs', this)">
         <span class="icon-wrap">👤</span> Paket Subs
       </button>
@@ -744,7 +624,7 @@
         <span class="icon-wrap">💳</span> Pembayaran
       </button>
       <button class="menu-item" onclick="openTab('testimoni', this)">
-        <span class="icon-wrap">⭐</span> Testimoni <span class="count" id="testiCount">8</span>
+        <span class="icon-wrap">⭐</span> Testimoni
       </button>
       <button class="menu-item" onclick="openTab('faq', this)">
         <span class="icon-wrap">❓</span> FAQ
@@ -752,8 +632,7 @@
     </nav>
 
     <div class="sidebar-footer">
-      <!-- TOMBOL KONTAK -->
-      <a href="https://t.me/CryptoRetjeh_IND" target="_blank" class="contact-btn btn-tg">✈️ Admin Telegram</a>
+      <a href="https://t.me/CryptoRetjeh_IND" target="_blank" class="contact-btn btn-tg">✈️ Admin Tele</a>
       <a href="https://wa.me/6281279499478" target="_blank" class="contact-btn btn-wa">💬 WhatsApp</a>
     </div>
   </aside>
@@ -767,18 +646,16 @@
     <div class="banner">
       <div class="banner-content">
         <span class="banner-tag">LAYANAN 100% MANUAL</span>
-        <h1>Tingkatkan Engagement Sosmed Anda</h1>
-        <p>Dikerjakan manual oleh real human, bukan bot. Proses bertahap, aman, dan transparan untuk keamanan akun Anda.</p>
+        <h1>Tingkatkan Engagement Sosmed</h1>
+        <p>Dikerjakan manual oleh real human, bukan bot. Proses bertahap dan aman.</p>
         
-        <!-- FITUR BARU: TOMBOL AKSI CEPAT -->
         <div class="banner-actions">
-          <button class="btn-quick primary" onclick="openTab('form-order', document.querySelector('.menu-item:nth-child(9)'))">🛒 Order Sekarang</button>
-          <button class="btn-quick secondary" onclick="openTab('telegram', document.querySelector('.menu-item:nth-child(1)'))">📋 Lihat Harga</button>
+          <button class="btn-quick primary" onclick="openTab('form-order', document.querySelector('.menu-item:nth-child(9)'))">🛒 Order</button>
+          <button class="btn-quick secondary" onclick="openTab('telegram', document.querySelector('.menu-item:nth-child(1)'))">📋 Harga</button>
         </div>
 
         <div class="banner-features">
-          <span>👨‍💻 Admin Real Human</span>
-          <span>📈 Proses Bertahap</span>
+          <span>👨‍💻 Real Human</span>
           <span>🔒 Tanpa Password</span>
         </div>
       </div>
@@ -787,12 +664,11 @@
     <!-- STATUS BAR -->
     <div class="status-bar">
       <div class="status-dot"></div>
-      Sistem Aktif — Minimal Order Rp 5.000. Dikerjakan manual oleh admin.
-      <span class="id-lead">Order ID: <b>#RS-<span id="orderIdDisplay">...</span></b></span>
+      Sistem Aktif — Min. Order Rp 5.000
+      <span class="id-lead">ID: <b>#RS-<span id="orderIdDisplay">...</span></b></span>
     </div>
 
-    <!-- ================= TAB KONTEN ================= -->
-
+    <!-- ================= KONTEN TAB ================= -->
     <div id="telegram" class="tab-content active">
       <div class="panel">
         <div class="panel-header">
@@ -802,8 +678,8 @@
         <table>
           <thead><tr><th>Layanan</th><th>Harga</th><th>Satuan</th></tr></thead>
           <tbody>
-            <tr><td>Member / Join Channel</td><td class="price-col">Rp 500</td><td>per member</td></tr>
-            <tr><td>Reaction (👍❤️🔥)</td><td class="price-col">Rp 250</td><td>per reaction</td></tr>
+            <tr><td>Member / Join</td><td class="price-col">Rp 500</td><td>per member</td></tr>
+            <tr><td>Reaction</td><td class="price-col">Rp 250</td><td>per reaction</td></tr>
             <tr><td>View Post</td><td class="price-col">Rp 1.500</td><td>per 5 view</td></tr>
             <tr><td>Share / Forward</td><td class="price-col">Rp 5.000</td><td>per 10 share</td></tr>
           </tbody>
@@ -905,40 +781,34 @@
     <!-- PAKET SUBS -->
     <div id="pkt-subs" class="tab-content">
       <h2 class="section-title">Paket Subs</h2>
-      <p class="section-sub">Pilihan paket hemat untuk menambah jumlah pengikut secara manual.</p>
-      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
-        <div class="pay-card" style="padding: 24px;">
-          <div style="font-weight: 800; font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">BRONZE</div>
-          <div style="font-size: 28px; font-weight: 800; color: var(--text-main); margin-bottom: 16px;">Rp 5.000</div>
-          <ul style="list-style: none; font-size: 13px; color: var(--text-muted); margin-bottom: 24px; line-height: 2;">
+      <p class="section-sub">Pilihan paket hemat menambah pengikut.</p>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+        <div class="pay-card" style="padding: 20px;">
+          <div style="font-size: 11px; color: var(--text-muted); font-weight: 800; margin-bottom: 8px;">BRONZE</div>
+          <div style="font-size: 24px; font-weight: 800; margin-bottom: 12px;">Rp 5.000</div>
+          <ul style="list-style: none; font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.8;">
             <li>✓ 10 Subscribe / Follow</li>
             <li>✓ Proses Manual Admin</li>
-            <li>✓ Progress Transparan</li>
           </ul>
-          <a href="https://wa.me/6281279499478" class="btn-copy">Pilih Paket</a>
+          <a href="https://wa.me/6281279499478" class="btn-copy" style="text-decoration:none;">Pilih Paket</a>
         </div>
-        <div class="pay-card" style="padding: 24px; border-color: rgba(0,255,163,0.5);">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 10px;">
-            <div style="font-weight: 800; font-size: 12px; color: var(--accent);">SILVER</div>
-            <span class="badge" style="font-size: 9px;">HOT</span>
-          </div>
-          <div style="font-size: 28px; font-weight: 800; color: var(--accent); margin-bottom: 16px;">Rp 12.500</div>
-          <ul style="list-style: none; font-size: 13px; color: var(--text-muted); margin-bottom: 24px; line-height: 2;">
+        <div class="pay-card" style="padding: 20px; border-color: rgba(0,255,163,0.5);">
+          <div style="font-size: 11px; color: var(--accent); font-weight: 800; margin-bottom: 8px;">SILVER</div>
+          <div style="font-size: 24px; font-weight: 800; color: var(--accent); margin-bottom: 12px;">Rp 12.500</div>
+          <ul style="list-style: none; font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.8;">
             <li>✓ 25 Subscribe / Follow</li>
             <li>✓ Proses Manual Admin</li>
-            <li>✓ Progress Transparan</li>
           </ul>
-          <a href="https://wa.me/6281279499478" class="btn-submit" style="text-decoration: none; padding: 12px;">Pilih Paket</a>
+          <a href="https://wa.me/6281279499478" class="btn-submit" style="text-decoration:none; padding:10px;">Pilih Paket</a>
         </div>
-        <div class="pay-card" style="padding: 24px;">
-          <div style="font-weight: 800; font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">GOLD</div>
-          <div style="font-size: 28px; font-weight: 800; color: var(--text-main); margin-bottom: 16px;">Rp 25.000</div>
-          <ul style="list-style: none; font-size: 13px; color: var(--text-muted); margin-bottom: 24px; line-height: 2;">
+        <div class="pay-card" style="padding: 20px;">
+          <div style="font-size: 11px; color: var(--text-muted); font-weight: 800; margin-bottom: 8px;">GOLD</div>
+          <div style="font-size: 24px; font-weight: 800; margin-bottom: 12px;">Rp 25.000</div>
+          <ul style="list-style: none; font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.8;">
             <li>✓ 50 Subscribe / Follow</li>
             <li>✓ Proses Manual Admin</li>
-            <li>✓ Progress Transparan</li>
           </ul>
-          <a href="https://wa.me/6281279499478" class="btn-copy">Pilih Paket</a>
+          <a href="https://wa.me/6281279499478" class="btn-copy" style="text-decoration:none;">Pilih Paket</a>
         </div>
       </div>
     </div>
@@ -946,63 +816,56 @@
     <!-- PAKET LIKE -->
     <div id="pkt-like" class="tab-content">
       <h2 class="section-title">Paket Like</h2>
-      <p class="section-sub">Pilihan paket hemat untuk menambah like secara manual.</p>
-      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
-        <div class="pay-card" style="padding: 24px;">
-          <div style="font-weight: 800; font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">BRONZE</div>
-          <div style="font-size: 28px; font-weight: 800; color: var(--text-main); margin-bottom: 16px;">Rp 2.500</div>
-          <ul style="list-style: none; font-size: 13px; color: var(--text-muted); margin-bottom: 24px; line-height: 2;">
+      <p class="section-sub">Pilihan paket hemat menambah like.</p>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+        <div class="pay-card" style="padding: 20px;">
+          <div style="font-size: 11px; color: var(--text-muted); font-weight: 800; margin-bottom: 8px;">BRONZE</div>
+          <div style="font-size: 24px; font-weight: 800; margin-bottom: 12px;">Rp 2.500</div>
+          <ul style="list-style: none; font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.8;">
             <li>✓ 10 Like / Reaction</li>
             <li>✓ Proses Manual Admin</li>
-            <li>✓ Progress Transparan</li>
           </ul>
-          <a href="https://wa.me/6281279499478" class="btn-copy">Pilih Paket</a>
+          <a href="https://wa.me/6281279499478" class="btn-copy" style="text-decoration:none;">Pilih Paket</a>
         </div>
-        <div class="pay-card" style="padding: 24px; border-color: rgba(0,255,163,0.5);">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 10px;">
-            <div style="font-weight: 800; font-size: 12px; color: var(--accent);">SILVER</div>
-            <span class="badge" style="font-size: 9px;">HOT</span>
-          </div>
-          <div style="font-size: 28px; font-weight: 800; color: var(--accent); margin-bottom: 16px;">Rp 6.000</div>
-          <ul style="list-style: none; font-size: 13px; color: var(--text-muted); margin-bottom: 24px; line-height: 2;">
+        <div class="pay-card" style="padding: 20px; border-color: rgba(0,255,163,0.5);">
+          <div style="font-size: 11px; color: var(--accent); font-weight: 800; margin-bottom: 8px;">SILVER</div>
+          <div style="font-size: 24px; font-weight: 800; color: var(--accent); margin-bottom: 12px;">Rp 6.000</div>
+          <ul style="list-style: none; font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.8;">
             <li>✓ 25 Like / Reaction</li>
             <li>✓ Proses Manual Admin</li>
-            <li>✓ Progress Transparan</li>
           </ul>
-          <a href="https://wa.me/6281279499478" class="btn-submit" style="text-decoration: none; padding: 12px;">Pilih Paket</a>
+          <a href="https://wa.me/6281279499478" class="btn-submit" style="text-decoration:none; padding:10px;">Pilih Paket</a>
         </div>
-        <div class="pay-card" style="padding: 24px;">
-          <div style="font-weight: 800; font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">GOLD</div>
-          <div style="font-size: 28px; font-weight: 800; color: var(--text-main); margin-bottom: 16px;">Rp 12.000</div>
-          <ul style="list-style: none; font-size: 13px; color: var(--text-muted); margin-bottom: 24px; line-height: 2;">
+        <div class="pay-card" style="padding: 20px;">
+          <div style="font-size: 11px; color: var(--text-muted); font-weight: 800; margin-bottom: 8px;">GOLD</div>
+          <div style="font-size: 24px; font-weight: 800; margin-bottom: 12px;">Rp 12.000</div>
+          <ul style="list-style: none; font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.8;">
             <li>✓ 50 Like / Reaction</li>
             <li>✓ Proses Manual Admin</li>
-            <li>✓ Progress Transparan</li>
           </ul>
-          <a href="https://wa.me/6281279499478" class="btn-copy">Pilih Paket</a>
+          <a href="https://wa.me/6281279499478" class="btn-copy" style="text-decoration:none;">Pilih Paket</a>
         </div>
       </div>
     </div>
 
     <!-- FORM ORDER -->
     <div id="form-order" class="tab-content">
-      <div class="panel" style="padding: 28px;">
+      <div class="panel" style="padding: 24px;">
         <h2 class="section-title">Form Order</h2>
-        <p class="section-sub">Isi data di bawah ini dengan benar. Order akan dikirim ke admin untuk diproses.</p>
+        <p class="section-sub">Isi data dengan benar untuk diproses admin.</p>
 
-        <!-- FITUR BARU: PANDUAN ALUR ORDER -->
         <div class="order-steps">
           <div class="step-item">
             <div class="step-num">1</div>
-            <div class="step-text">Isi Form Order</div>
+            <div class="step-text">Isi Form</div>
           </div>
           <div class="step-item">
             <div class="step-num">2</div>
-            <div class="step-text">Transfer Pembayaran</div>
+            <div class="step-text">Transfer</div>
           </div>
           <div class="step-item">
             <div class="step-num">3</div>
-            <div class="step-text">Admin Proses Manual</div>
+            <div class="step-text">Proses</div>
           </div>
         </div>
 
@@ -1020,113 +883,105 @@
           </div>
 
           <div class="form-group">
-            <label class="form-label">Jenis Layanan</label>
+            <label class="form-label">Layanan</label>
             <select class="form-control" id="layanan" required onchange="hitungTotal()">
               <option value="Subscriber / Follower" data-harga="500">Subscriber / Follower — Rp 500</option>
               <option value="Like / Reaction" data-harga="250">Like / Reaction — Rp 250</option>
               <option value="Komen" data-harga="1500">Komen — Rp 1.500 (per 5)</option>
-              <option value="Share / Bagikan" data-harga="5000">Share / Bagikan — Rp 5.000 (per 10)</option>
-              <option value="View / Tonton" data-harga="1500">View / Tonton — Rp 1.500</option>
+              <option value="Share / Bagikan" data-harga="5000">Share — Rp 5.000 (per 10)</option>
+              <option value="View / Tonton" data-harga="1500">View — Rp 1.500</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label class="form-label">Jumlah Pesanan</label>
+            <label class="form-label">Jumlah</label>
             <input type="number" class="form-control" id="jumlah" placeholder="Contoh: 1000" required min="1" oninput="hitungTotal()">
           </div>
 
           <div class="price-total-box">
-            <span class="label">Estimasi Total</span>
+            <span class="label">Total</span>
             <span class="value" id="totalHarga">Rp 0</span>
           </div>
 
-          <div class="form-group" style="margin-top: 20px;">
+          <div class="form-group" style="margin-top: 16px;">
             <label class="form-label">Link Target</label>
             <input type="url" class="form-control" id="link" placeholder="https://..." required>
           </div>
 
           <div class="form-group">
             <label class="form-label">Nama / Username</label>
-            <input type="text" class="form-control" id="nama" placeholder="Masukkan nama Anda" required>
+            <input type="text" class="form-control" id="nama" placeholder="Nama Anda" required>
           </div>
 
-          <button type="submit" class="btn-submit" id="btnSubmit">
-            SEND ORDER
-          </button>
+          <button type="submit" class="btn-submit" id="btnSubmit">SEND ORDER</button>
         </form>
       </div>
     </div>
 
     <!-- PEMBAYARAN -->
     <div id="pembayaran" class="tab-content">
-      <h2 class="section-title">Metode Pembayaran</h2>
-      <p class="section-sub">Silakan transfer ke salah satu rekening di bawah, lalu kirim bukti ke admin.</p>
+      <h2 class="section-title">Pembayaran</h2>
+      <p class="section-sub">Transfer ke rekening di bawah, lalu kirim bukti.</p>
 
       <div class="pay-grid">
         <div class="pay-card">
           <div class="pay-card-header bca">
-            <div class="pay-brand-logo bca-logo">BCA</div>
-            <span class="pay-verified">✓ VERIFIED</span>
+            <div style="font-weight:800; color:#6ec2ff;">BCA</div>
+            <span class="badge">✓</span>
           </div>
           <div class="pay-card-body">
-            <div class="pay-label-small">Nomor Rekening</div>
+            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase;">Nomor Rekening</div>
             <div class="pay-number" id="bca-num">85-3533-9593</div>
-            <div class="pay-name">A/n <strong>Agustian Pratama</strong></div>
+            <div style="font-size:12px; color:var(--text-muted); margin-bottom:16px;">A/n <b>Agustian Pratama</b></div>
             <button class="btn-copy" onclick="copyText('bca-num', '[OK] Nomor BCA disalin!')">Copy Number</button>
           </div>
         </div>
 
         <div class="pay-card">
           <div class="pay-card-header dana">
-            <div class="pay-brand-logo dana-logo">DANA</div>
-            <span class="pay-verified">✓ VERIFIED</span>
+            <div style="font-weight:800; color:#4dd0ff;">DANA</div>
+            <span class="badge">✓</span>
           </div>
           <div class="pay-card-body">
-            <div class="pay-label-small">Nomor HP / Akun</div>
+            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase;">Nomor HP</div>
             <div class="pay-number" id="dana-num">0812-7949-9478</div>
-            <div class="pay-name">A/n <strong>Agustian Pratama</strong></div>
+            <div style="font-size:12px; color:var(--text-muted); margin-bottom:16px;">A/n <b>Agustian Pratama</b></div>
             <button class="btn-copy" onclick="copyText('dana-num', '[OK] Nomor DANA disalin!')">Copy Number</button>
           </div>
         </div>
       </div>
 
       <div class="pay-info-box">
-        <div class="info-icon">💡</div>
+        <div style="font-size: 20px;">💡</div>
         <div>
-          <strong>PENTING:</strong> Setelah transfer, kirim screenshot bukti ke Admin Telegram atau WhatsApp. Karena proses dilakukan manual (bukan bot), mohon tunggu konfirmasi dari admin.
+          <strong>PENTING:</strong> Kirim screenshot bukti transfer ke Admin Telegram atau WhatsApp.
         </div>
       </div>
     </div>
 
     <!-- TESTIMONI -->
     <div id="testimoni" class="tab-content">
-      <h2 class="section-title">Ulasan Pelanggan</h2>
-      <p class="section-sub">Pengalaman dari pembeli yang sudah bertransaksi.</p>
+      <h2 class="section-title">Ulasan</h2>
+      <p class="section-sub">Pengalaman dari pelanggan.</p>
 
       <div class="testimonial-form">
-        <div style="font-size: 16px; font-weight: 700; color: var(--text-main); margin-bottom: 16px;">Tulis Testimoni Anda</div>
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Tulis Testimoni</div>
         <form id="testimonialForm" onsubmit="submitTestimonial(event)">
           <div class="form-group">
             <label class="form-label">Nama / Username</label>
-            <input type="text" class="form-control" id="testiNama" placeholder="Nama atau @username" required maxlength="30">
+            <input type="text" class="form-control" id="testiNama" placeholder="@username" required maxlength="30">
           </div>
           <div class="form-group">
             <label class="form-label">Rating</label>
             <div class="star-rating" id="starRating">
-              <span data-value="1">★</span>
-              <span data-value="2">★</span>
-              <span data-value="3">★</span>
-              <span data-value="4">★</span>
-              <span data-value="5">★</span>
+              <span data-value="1">★</span><span data-value="2">★</span><span data-value="3">★</span><span data-value="4">★</span><span data-value="5">★</span>
             </div>
           </div>
           <div class="form-group">
             <label class="form-label">Testimoni</label>
-            <textarea class="form-control" id="testiText" rows="3" placeholder="Ceritakan pengalaman Anda..." required maxlength="300"></textarea>
+            <textarea class="form-control" id="testiText" rows="2" placeholder="Pengalaman Anda..." required maxlength="300"></textarea>
           </div>
-          <button type="submit" class="btn-submit">
-            Kirim Testimoni
-          </button>
+          <button type="submit" class="btn-submit" style="margin-top: 10px;">Kirim</button>
           <div class="form-feedback" id="testiFeedback"></div>
         </form>
       </div>
@@ -1136,27 +991,23 @@
 
     <!-- FAQ -->
     <div id="faq" class="tab-content">
-      <h2 class="section-title">Pertanyaan Umum (FAQ)</h2>
-      <p class="section-sub">Pertanyaan yang sering diajukan oleh pelanggan.</p>
+      <h2 class="section-title">FAQ</h2>
+      <p class="section-sub">Pertanyaan umum.</p>
 
       <div class="faq-item" onclick="toggleFaq(this)">
-        <button class="faq-question">Apakah akun saya aman? Butuh password?</button>
-        <div class="faq-answer">100% AMAN. Kami TIDAK membutuhkan password. Hanya butuh link profil (untuk follower/subs) atau link postingan (untuk like/komen/view).</div>
+        <button class="faq-question">Aman? Butuh password?</button>
+        <div class="faq-answer">100% AMAN. Tidak butuh password. Hanya butuh link profil atau link postingan.</div>
       </div>
       <div class="faq-item" onclick="toggleFaq(this)">
-        <button class="faq-question">Berapa lama proses pengerjaannya?</button>
-        <div class="faq-answer">Karena dikerjakan REAL HUMAN (bukan bot), proses dilakukan bertahap. Waktu bervariasi tergantung antrian. Admin akan memberi estimasi setelah order dikonfirmasi.</div>
+        <button class="faq-question">Berapa lama prosesnya?</button>
+        <div class="faq-answer">Dikerjakan REAL HUMAN (bukan bot), proses bertahap. Admin akan memberi estimasi setelah order dikonfirmasi.</div>
       </div>
       <div class="faq-item" onclick="toggleFaq(this)">
-        <button class="faq-question">Apakah ada minimal order?</button>
-        <div class="faq-answer">Ya, minimal order Rp 5.000. Bisa kombinasi beberapa layanan untuk mencapai minimal order.</div>
+        <button class="faq-question">Minimal order?</button>
+        <div class="faq-answer">Minimal order Rp 5.000. Bisa kombinasi beberapa layanan.</div>
       </div>
       <div class="faq-item" onclick="toggleFaq(this)">
-        <button class="faq-question">Bagaimana sistem pengerjaannya?</button>
-        <div class="faq-answer">Dikerjakan MANUAL dan BERTAHAP untuk keamanan akun. Tidak ada bot otomatis. Admin kirim update progres berkala.</div>
-      </div>
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <button class="faq-question">Metode pembayaran apa saja?</button>
+        <button class="faq-question">Metode pembayaran?</button>
         <div class="faq-answer">Transfer Bank BCA dan E-Wallet DANA. Nomor lengkap ada di menu "Pembayaran".</div>
       </div>
     </div>
@@ -1164,11 +1015,10 @@
     <!-- TENTANG KAMI -->
     <div class="about-box">
       <h3>Tentang Retjeh Store</h3>
-      <p>Retjeh Store adalah layanan penyedia jasa sosial media yang berfokus pada <strong>kualitas dan keamanan akun</strong>. Berbeda dengan layanan otomatis (bot), kami menggunakan tenaga manusia asli (real human) untuk setiap pesanan. Hal ini memastikan setiap interaksi (followers, likes, views) terlihat natural dan meminimalisir risiko pembatasan dari platform.</p>
-      <p>Kami telah melayani ratusan pelanggan dengan berbagai kebutuhan, mulai dari penjual online, content creator, hingga pemilik bisnis yang ingin meningkatkan kredibilitas media sosial mereka. Kami berkomitmen memberikan proses yang transparan dan aman tanpa perlu meminta kata sandi akun Anda.</p>
+      <p>Retjeh Store adalah layanan jasa sosial media yang berfokus pada <strong>kualitas dan keamanan akun</strong>. Kami menggunakan tenaga manusia asli (real human) untuk setiap pesanan. Hal ini memastikan setiap interaksi terlihat natural dan meminimalisir risiko pembatasan dari platform.</p>
     </div>
 
-    <div class="footer" style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-glass); text-align: center; color: var(--text-muted); font-size: 12px;">
+    <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border-glass); text-align: center; color: var(--text-muted); font-size: 11px;">
       <p>© 2026 Retjeh Store. All rights reserved.</p>
     </div>
 
@@ -1177,17 +1027,13 @@
 
 <div id="toast" class="toast">Berhasil!</div>
 
-<!-- FITUR BARU: TOMBOL SCROLL TO TOP -->
 <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
 
 <script>
-  // ============================================================
   // KONFIGURASI
-  // ============================================================
   const TG_BOT_TOKEN = "9122151061:AAEXxMjlrQspl7EOC815YL4iekiInPTVu9s";
   const TG_CHAT_ID   = "8236249613";
 
-  // Order ID
   function generateOrderId() {
     var now = new Date();
     var y = String(now.getFullYear()).slice(-2);
@@ -1198,9 +1044,6 @@
   }
   document.getElementById('orderIdDisplay').textContent = generateOrderId();
 
-  // ============================================================
-  // NAVIGASI TAB
-  // ============================================================
   function openTab(tabName, btn) {
     var contents = document.getElementsByClassName("tab-content");
     for (var i = 0; i < contents.length; i++) contents[i].classList.remove("active");
@@ -1211,9 +1054,6 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // ============================================================
-  // COPY & TOAST
-  // ============================================================
   function copyText(elementId, message) {
     var text = document.getElementById(elementId).innerText;
     var cleanText = text.replace(/-/g, '');
@@ -1233,14 +1073,12 @@
   function showToast(message, isError) {
     var toast = document.getElementById("toast");
     toast.innerText = message;
-    toast.classList.toggle("error", !!isError);
+    toast.style.borderColor = isError ? '#ff4d6d' : 'var(--accent)';
+    toast.style.color = isError ? '#ff4d6d' : 'var(--accent)';
     toast.classList.add("show");
-    setTimeout(function() { toast.classList.remove("show"); }, 3500);
+    setTimeout(function() { toast.classList.remove("show"); }, 3000);
   }
 
-  // ============================================================
-  // HITUNG TOTAL HARGA
-  // ============================================================
   function hitungTotal() {
     var layananEl = document.getElementById('layanan');
     var opt = layananEl.options[layananEl.selectedIndex];
@@ -1261,18 +1099,14 @@
 
     if (total > 0 && total < 5000) {
       totalEl.style.color = 'var(--gold)';
-      totalEl.textContent += ' (min Rp 5.000)';
+      totalEl.textContent += ' (min 5rb)';
     } else {
       totalEl.style.color = 'var(--accent)';
     }
   }
 
-  // ============================================================
-  // KIRIM ORDER
-  // ============================================================
   function kirimOrder(event) {
     event.preventDefault();
-
     var platform = document.getElementById("platform").value;
     var layanan  = document.getElementById("layanan").value;
     var jumlah   = document.getElementById("jumlah").value;
@@ -1281,291 +1115,99 @@
     var totalText = document.getElementById("totalHarga").textContent;
     var orderId  = document.getElementById("orderIdDisplay").textContent;
     var btn = document.getElementById("btnSubmit");
-    var originalText = btn.innerHTML;
 
     if (!jumlah || jumlah < 1) { showToast("[ERR] Jumlah tidak valid!", true); return; }
-    if (!link.startsWith("http")) { showToast("[ERR] Link tidak valid! Harap gunakan http/https", true); return; }
+    if (!link.startsWith("http")) { showToast("[ERR] Link tidak valid!", true); return; }
 
     var now = new Date();
-    var tanggal = now.toLocaleString('id-ID', {
-      day:'2-digit', month:'short', year:'numeric',
-      hour:'2-digit', minute:'2-digit'
-    });
+    var tanggal = now.toLocaleString('id-ID', { day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit' });
 
-    var pesan =
-      "🖤 <b>NEW ORDER — RETJEH STORE</b> 🖤\n" +
-      "━━━━━━━━━━━━━━━━━━━━\n" +
-      "🆔 <b>Order ID</b>: <code>#RS-" + escapeHtml(orderId) + "</code>\n" +
-      "🕒 <b>Waktu</b>: " + escapeHtml(tanggal) + "\n" +
-      "━━━━━━━━━━━━━━━━━━━━\n" +
-      "📌 <b>Platform</b>: " + escapeHtml(platform) + "\n" +
-      "⚙️ <b>Layanan</b>: " + escapeHtml(layanan) + "\n" +
-      "🔢 <b>Jumlah</b>: " + escapeHtml(String(jumlah)) + "\n" +
-      "💰 <b>Estimasi Total</b>: " + escapeHtml(totalText) + "\n" +
-      "🔗 <b>Link</b>: " + escapeHtml(link) + "\n" +
-      "👤 <b>Nama/Username</b>: " + escapeHtml(nama) + "\n" +
-      "━━━━━━━━━━━━━━━━━━━━\n" +
-      "⏳ <i>Menunggu konfirmasi & pembayaran.</i>\n" +
-      "💡 <i>Proses manual oleh admin (bukan bot).</i>";
+    var pesan = "🖤 <b>ORDER BARU — RETJEH</b>\nID: <code>#RS-" + orderId + "</code>\n" + tanggal + "\n\n" +
+      "📌 " + platform + "\n⚙️ " + layanan + "\n🔢 " + jumlah + "\n💰 " + totalText + "\n🔗 " + link + "\n👤 " + nama;
 
-    btn.disabled = true;
-    btn.innerHTML = "⏳ Mengirim...";
+    btn.disabled = true; btn.innerHTML = "⏳...";
 
     fetch("https://api.telegram.org/bot" + TG_BOT_TOKEN + "/sendMessage", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: TG_CHAT_ID,
-        text: pesan,
-        parse_mode: "HTML",
-        disable_web_page_preview: true
-      })
-    })
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
+      body: JSON.stringify({ chat_id: TG_CHAT_ID, text: pesan, parse_mode: "HTML" })
+    }).then(res => res.json()).then(data => {
       if (data.ok) {
-        showToast("[SUCCESS] Order terkirim ke admin Telegram!");
+        showToast("Order Terkirim!");
         document.getElementById("orderForm").reset();
         document.getElementById("totalHarga").textContent = 'Rp 0';
         document.getElementById("orderIdDisplay").textContent = generateOrderId();
         setTimeout(function() {
-          if (confirm("✅ Order #RS-" + orderId + " berhasil dikirim ke Admin Telegram.\n\nKlik OK untuk membuka chat WhatsApp sebagai backup (opsional).")) {
-            var waMsg = encodeURIComponent(
-              "*HALO ADMIN RETJEH STORE* 👋\n\n" +
-              "🆔 Order ID: #RS-" + orderId + "\n" +
-              "📌 Platform: " + platform + "\n" +
-              "⚙️ Layanan: " + layanan + "\n" +
-              "🔢 Jumlah: " + jumlah + "\n" +
-              "💰 Total: " + totalText + "\n" +
-              "🔗 Link: " + link + "\n" +
-              "👤 Nama: " + nama + "\n\n" +
-              "Order sudah dikirim ke Bot Telegram, mohon konfirmasi."
-            );
+          if (confirm("Order #RS-" + orderId + " terkirim.\nBuka WhatsApp untuk backup?")) {
+            var waMsg = encodeURIComponent("*HALO ADMIN* 👋\nID: #RS-" + orderId + "\nPlatform: " + platform + "\nLayanan: " + layanan + "\nJumlah: " + jumlah + "\nTotal: " + totalText + "\nLink: " + link);
             window.open("https://wa.me/6281279499478?text=" + waMsg, "_blank");
           }
-        }, 500);
+        }, 300);
       } else {
-        console.error("Telegram API Error:", data);
-        showToast("[ERR] Gagal kirim: " + (data.description || "Unknown error"), true);
-        fallbackWhatsApp(platform, layanan, jumlah, totalText, link, nama, orderId);
+        showToast("Gagal kirim, coba lagi.", true);
       }
-    })
-    .catch(function(err) {
-      console.error("Network Error:", err);
-      showToast("[ERR] Network error, beralih ke WhatsApp...", true);
-      fallbackWhatsApp(platform, layanan, jumlah, totalText, link, nama, orderId);
-    })
-    .finally(function() {
-      btn.disabled = false;
-      btn.innerHTML = originalText;
-    });
+    }).catch(() => {
+      showToast("Error jaringan, beralih ke WA...", true);
+      var waMsg = encodeURIComponent("*HALO ADMIN* 👋\nID: #RS-" + orderId + "\nPlatform: " + platform + "\nLayanan: " + layanan + "\nJumlah: " + jumlah + "\nTotal: " + totalText + "\nLink: " + link);
+      window.open("https://wa.me/6281279499478?text=" + waMsg, "_blank");
+    }).finally(() => { btn.disabled = false; btn.innerHTML = "SEND ORDER"; });
   }
 
-  function fallbackWhatsApp(platform, layanan, jumlah, totalText, link, nama, orderId) {
-    var waMsg = encodeURIComponent(
-      "*HALO ADMIN RETJEH STORE* 👋\n\n" +
-      "🆔 Order ID: #RS-" + orderId + "\n" +
-      "📌 Platform: " + platform + "\n" +
-      "⚙️ Layanan: " + layanan + "\n" +
-      "🔢 Jumlah: " + jumlah + "\n" +
-      "💰 Total: " + totalText + "\n" +
-      "🔗 Link: " + link + "\n" +
-      "👤 Nama: " + nama + "\n\n" +
-      "Mohon konfirmasi harga & stok. Terima kasih!"
-    );
-    window.open("https://wa.me/6281279499478?text=" + waMsg, "_blank");
-  }
-
-  function escapeHtml(text) {
-    return String(text)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;");
-  }
-
-  // ============================================================
-  // FAQ
-  // ============================================================
   function toggleFaq(element) {
     var allFaqs = document.querySelectorAll('.faq-item');
     allFaqs.forEach(function(faq) { if (faq !== element) faq.classList.remove('active'); });
     element.classList.toggle('active');
   }
 
-  // ============================================================
-  // TESTIMONI
-  // ============================================================
-  var TESTI_KEY = 'retjeh_testimonials_v4';
-  var TESTI_SUBMITTED_FLAG = 'retjeh_testi_submitted_v4';
-
-  function getRandomRating() {
-    return Math.floor(Math.random() * 3) + 3;
-  }
-
+  var TESTI_KEY = 'retjeh_testimonials_v5';
+  function getRandomRating() { return Math.floor(Math.random() * 3) + 3; }
+  
   function getDefaultTestimonials() {
     return [
-      { nama: '@rizky_aja',    teks: 'Prosesnya agak lama karena manual, tapi hasilnya real. Followers masuk bertahap, aman.', rating: 4, tanggal: '1 hari lalu', isUser: false },
-      { nama: '@dewi.shop',    teks: 'Awalnya ragu, tapi admin fast respon di WA. Like masuk sesuai pesanan. Recommended!', rating: 5, tanggal: '2 hari lalu', isUser: false },
-      { nama: '@budi_saputra', teks: 'Lumayan, tapi sempat telat 1 jam dari estimasi. Overall oke sih buat harga segini.', rating: 3, tanggal: '3 hari lalu', isUser: false },
-      { nama: '@citra_makeup', teks: 'Subscriber YouTube nambah manual, aman nggak kena banned. Adminnya ramah banget.', rating: 5, tanggal: '4 hari lalu', isUser: false },
-      { nama: '@andi_gaming',  teks: 'View TikTok masuk pelan-pelan tapi real. Harga murah, cocok buat yang budget minim.', rating: 4, tanggal: '5 hari lalu', isUser: false },
-      { nama: '@sarah_olshop', teks: 'Prosesnya transparan, admin update progres tiap 30 menit. Puas banget!', rating: 5, tanggal: '1 minggu lalu', isUser: false },
-      { nama: '@fajar_tech',   teks: 'Bintang 3 karena antriannya lumayan panjang. Tapi hasil akhirnya sesuai pesanan.', rating: 3, tanggal: '1 minggu lalu', isUser: false },
-      { nama: '@nadia_art',    teks: 'Sudah order 3x, selalu aman. Reaction Telegram masuk sesuai jumlah. Mantap!', rating: 5, tanggal: '2 minggu lalu', isUser: false }
+      { nama: '@rizky', teks: 'Aman, real. Followers masuk bertahap.', rating: 4, tanggal: '1 hari lalu' },
+      { nama: '@dewi', teks: 'Admin fast respon. Recommended!', rating: 5, tanggal: '2 hari lalu' },
+      { nama: '@budi', teks: 'Lumayan, agak telat tapi oke.', rating: 3, tanggal: '3 hari lalu' },
+      { nama: '@citra', teks: 'Subs YouTube aman nggak kena banned.', rating: 5, tanggal: '4 hari lalu' }
     ];
   }
 
-  function loadTestimonials() {
-    try {
-      var saved = localStorage.getItem(TESTI_KEY);
-      if (saved) return JSON.parse(saved);
-    } catch (e) { console.warn('Load testi error:', e); }
-    return null;
-  }
-
-  function saveTestimonials(list) {
-    try {
-      localStorage.setItem(TESTI_KEY, JSON.stringify(list));
-    } catch (e) { console.warn('Save testi error:', e); }
-  }
-
-  function renderTestimonials(list) {
+  function renderTestimonials() {
+    var list = JSON.parse(localStorage.getItem(TESTI_KEY)) || getDefaultTestimonials();
     var grid = document.getElementById('testimoniGrid');
-    if (!grid) return;
     grid.innerHTML = '';
-
     list.forEach(function(t) {
-      var card = document.createElement('div');
-      card.className = 'testi-card' + (t.isUser ? ' user-submitted' : '');
-      var initial = (t.nama || '?').replace('@', '').charAt(0).toUpperCase();
       var stars = '★'.repeat(t.rating) + '☆'.repeat(5 - t.rating);
-
-      card.innerHTML =
-        '<div class="testi-header">' +
-          '<div class="testi-avatar">' + escapeHtml(initial) + '</div>' +
-          '<div>' +
-            '<div class="testi-name">' + escapeHtml(t.nama) + '</div>' +
-            '<div class="testi-date">' + escapeHtml(t.tanggal || 'Baru saja') + '</div>' +
-          '</div>' +
-        '</div>' +
-        '<div class="testi-stars">' + stars + '</div>' +
-        '<div class="testi-text">' + escapeHtml(t.teks) + '</div>'; 
-      grid.appendChild(card);
+      grid.innerHTML += '<div class="testi-card"><div class="testi-header"><div class="testi-avatar">' + t.nama.charAt(1).toUpperCase() + '</div><div><div style="font-weight:700;font-size:13px;">' + t.nama + '</div><div style="font-size:10px;color:var(--text-muted);">' + t.tanggal + '</div></div></div><div style="color:var(--gold);font-size:14px;margin-bottom:8px;">' + stars + '</div><div class="testi-text">' + t.teks + '</div></div>';
     });
-
-    var counter = document.getElementById('testiCount');
-    if (counter) counter.textContent = list.length;
-  }
-
-  function initTestimonials() {
-    var saved = loadTestimonials();
-    if (!saved || saved.length === 0) {
-      saved = getDefaultTestimonials();
-      saveTestimonials(saved);
-    }
-    renderTestimonials(saved);
   }
 
   var starSpans = document.querySelectorAll('#starRating span');
-  function updateStars(rating) {
-    starSpans.forEach(function(star, idx) {
-      star.classList.toggle('active', idx < rating);
-    });
-  }
-
+  function updateStars(rating) { starSpans.forEach((s, i) => s.classList.toggle('active', i < rating)); }
   updateStars(getRandomRating());
-
-  starSpans.forEach(function(star) {
-    star.addEventListener('click', function() {
-      var r = getRandomRating();
-      updateStars(r);
-      showToast('Rating acak: ' + r + '/5');
-    });
-  });
+  starSpans.forEach(s => s.addEventListener('click', () => { updateStars(getRandomRating()); }));
 
   function submitTestimonial(event) {
     event.preventDefault();
     var nama = document.getElementById('testiNama').value.trim();
     var text = document.getElementById('testiText').value.trim();
-    var feedbackEl = document.getElementById('testiFeedback');
-
-    if (!nama || !text) {
-      feedbackEl.textContent = 'Nama dan testimoni harus diisi.';
-      feedbackEl.classList.add('show');
-      return;
-    }
-
-    if (localStorage.getItem(TESTI_SUBMITTED_FLAG) === '1') {
-      feedbackEl.textContent = 'Anda sudah mengirim testimoni. Terima kasih!';
-      feedbackEl.classList.add('show');
-      showToast('Testimoni sudah pernah dikirim', true);
-      return;
-    }
-
-    var rating = getRandomRating();
-    var newTesti = {
-      nama: nama,
-      teks: text,
-      rating: rating,
-      tanggal: 'Baru saja',
-      isUser: true,
-      timestamp: Date.now()
-    };
-
-    var list = loadTestimonials() || getDefaultTestimonials();
-    list.unshift(newTesti);
-    saveTestimonials(list);
-    renderTestimonials(list);
-    localStorage.setItem(TESTI_SUBMITTED_FLAG, '1');
-
-    var now = new Date();
-    var tanggal = now.toLocaleString('id-ID', {
-      day:'2-digit', month:'short', year:'numeric',
-      hour:'2-digit', minute:'2-digit'
-    });
-    var pesan =
-      "⭐ <b>TESTIMONI BARU — RETJEH STORE</b> ⭐\n" +
-      "━━━━━━━━━━━━━━━━━━━━\n" +
-      "👤 <b>Nama</b>: " + escapeHtml(nama) + "\n" +
-      "⭐ <b>Rating</b>: " + rating + "/5\n" +
-      "💬 <b>Testimoni</b>: " + escapeHtml(text) + "\n" +
-      "🕒 <b>Waktu</b>: " + escapeHtml(tanggal) + "\n" +
-      "━━━━━━━━━━━━━━━━━━━━";
-
-    fetch("https://api.telegram.org/bot" + TG_BOT_TOKEN + "/sendMessage", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: TG_CHAT_ID, text: pesan, parse_mode: "HTML" })
-    }).catch(function(err) { console.warn('Telegram error:', err); });
-
+    if (!nama || !text) return;
+    
+    var list = JSON.parse(localStorage.getItem(TESTI_KEY)) || getDefaultTestimonials();
+    list.unshift({ nama: nama, teks: text, rating: getRandomRating(), tanggal: 'Baru saja' });
+    localStorage.setItem(TESTI_KEY, JSON.stringify(list));
+    renderTestimonials();
     document.getElementById('testimonialForm').reset();
-    updateStars(getRandomRating());
-    feedbackEl.textContent = 'Testimoni berhasil dikirim!';
-    feedbackEl.classList.add('show');
-    setTimeout(function() { feedbackEl.classList.remove('show'); }, 5000);
-    showToast('Testimoni berhasil dikirim!');
+    showToast("Testimoni Terkirim!");
   }
 
-  // ============================================================
-  // SCROLL TO TOP
-  // ============================================================
   window.onscroll = function() {
-    var scrollBtn = document.getElementById("scrollTopBtn");
-    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-      scrollBtn.classList.add("show");
-    } else {
-      scrollBtn.classList.remove("show");
-    }
+    var btn = document.getElementById("scrollTopBtn");
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) btn.classList.add("show");
+    else btn.classList.remove("show");
   };
 
-  // ============================================================
-  // INIT
-  // ============================================================
-  document.addEventListener('DOMContentLoaded', function() {
-    initTestimonials();
-    hitungTotal();
-  });
+  document.addEventListener('DOMContentLoaded', function() { renderTestimonials(); hitungTotal(); });
 </script>
 
 </body>
-  </html>
+                               </html>
