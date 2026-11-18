@@ -2,7 +2,7 @@ import telebot
 from telebot import types
 
 # GANTI DENGAN TOKEN BARU ANDA
-BOT_TOKEN = "MASUKKAN_TOKEN_BARU_ANDA_DI_SINI"
+BOT_TOKEN = "9122151061:AAEXxMjlrQspl7EOC815YL4iekiInPTVu9s"
 bot = telebot.TeleBot(BOT_TOKEN)
 
 WEBSITE_URL = "https://cryptoretjeh.github.io/Cr/"
