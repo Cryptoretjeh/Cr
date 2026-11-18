@@ -3,9 +3,10 @@ name: Telegram Bot
 on:
   push:
     branches: [ main ]
-    schedule:
-    # Berjalan setiap 5 jam sekali untuk memastikan bot tidak mati
+  schedule:
     - cron: '0 */5 * * *'
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
